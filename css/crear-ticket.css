@@ -1,0 +1,85 @@
+.user-avatar {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.ticket-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+}
+
+.ticket-form {
+    width: 100%;
+    max-width: 480px;
+    background: #111;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #2a2a2a;
+}
+
+.ticket-heading {
+    color: var(--primary);
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.6rem;
+}
+
+.ticket-product {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #000;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.ticket-product i {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.ticket-product h3 {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.ticket-product p {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.ticket-form .form-group {
+    margin-bottom: 20px;
+}
+
+.ticket-form .form-group:last-of-type {
+    margin-bottom: 30px;
+}
+
+.ticket-form label {
+    display: block;
+    color: var(--primary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ticket-form select,
+.ticket-form input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    background: #000;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.ticket-submit {
+    height: 50px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}

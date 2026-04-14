@@ -1,27 +1,61 @@
-<main class="content-area">
-    <h1 class="page-title">Mis Rentas Activas</h1>
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Sport Ticket</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <i class="fa-solid fa-dumbbell"></i>
+            <span>Sport Ticket</span>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="index.html"><i class="fa-solid fa-house"></i> <span>Catálogo</span></a>
+            <a href="mis-tickets.html"><i class="fa-solid fa-ticket"></i> <span>Mis Tickets</span></a>
+            <a href="dashboard.html" class="active"><i class="fa-solid fa-chart-line"></i> <span>Dashboard</span></a>
+            <a href="perfil.html"><i class="fa-solid fa-user-gear"></i> <span>Perfil</span></a>
+        </nav>
+        <div class="sidebar-footer"><a href="login.html"><i class="fa-solid fa-right-from-bracket"></i> Salir</a></div>
+    </aside>
 
-    <table class="data-table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Fecha Préstamo</th>
-                <th>Devolución</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Balón de Voleibol #5</td>
-                <td>14/04/2026 - 2:00 PM</td>
-                <td>14/04/2026 - 4:00 PM</td>
-                <td><span class="badge activo">Activo</span></td>
-                <td>
-                    <button style="padding: 5px 10px; cursor: pointer;">Extender</button>
-                    <button style="padding: 5px 10px; cursor: pointer; color: red;">Devolver</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</main>
+    <div class="main-wrapper">
+        <header class="top-navbar">
+            <h1 class="page-title">Mis Rentas Activas</h1>
+            <div class="user-profile"><span>Juan Carlos R.</span></div>
+        </header>
+
+        <main class="content-area">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Fecha Préstamo</th>
+                        <th>Devolución</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Balón de Voleibol #5</td>
+                        <td>14/04/2026 - 2:00 PM</td>
+                        <td>14/04/2026 - 4:00 PM</td>
+                        <td><span class="badge activo">Activo</span></td>
+                        <td>
+                            <button class="dashboard-action">Extender</button>
+                            <button class="dashboard-action dashboard-action-danger">Devolver</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+</html>
+
+

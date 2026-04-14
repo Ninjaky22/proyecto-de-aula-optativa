@@ -1,0 +1,9 @@
+.auth-title {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.auth-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 25px;
+}

@@ -1,14 +1,19 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo | Sport Ticket</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <aside class="sidebar">
-        <div class="sidebar-logo"><img src="img/logo.png" alt="Logo"></div>
+        <div class="sidebar-logo">
+            <i class="fa-solid fa-dumbbell"></i>
+            <span>Sport Ticket</span>
+        </div>
         <nav class="sidebar-menu">
             <a href="index.html" class="active"><i class="fa-solid fa-house"></i> <span>Catálogo</span></a>
             <a href="mis-tickets.html"><i class="fa-solid fa-ticket"></i> <span>Mis Tickets</span></a>
@@ -22,41 +27,43 @@
     <div class="main-wrapper">
         <header class="top-navbar">
             <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass" style="color: #666;"></i>
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 <input type="text" placeholder="¿Qué implemento buscas?">
             </div>
             <div class="user-profile">
                 <span>Juan Carlos R.</span>
-                <i class="fa-solid fa-circle-user" style="font-size: 1.5rem; color: var(--primary);"></i>
+                <i class="fa-solid fa-circle-user user-avatar"></i>
             </div>
         </header>
 
-        <main class="content-area" style="padding: 60px 40px;">
-            <h1 class="page-title" style="margin-bottom: 40px;">Implementos Deportivos</h1>
-            
+        <main class="content-area catalog-content">
+            <h1 class="page-title catalog-title">Implementos Deportivos</h1>
+
             <div class="product-grid">
-                <div class="product-card" style="padding: 30px; border-radius: 15px;">
-                    <i class="fa-solid fa-volleyball" style="color: var(--primary); font-size: 3.5rem;"></i>
-                    <h3 style="margin-top: 15px;">Balón de Voleibol</h3>
-                    <p style="margin-bottom: 20px;">FUT-01 | Disponible</p>
+                <div class="product-card catalog-card">
+                    <i class="fa-solid fa-volleyball"></i>
+                    <h3>Balón de Voleibol</h3>
+                    <p>FUT-01 | Disponible</p>
                     <a href="crear-ticket.html"><button class="btn-add">Solicitar Ticket</button></a>
                 </div>
 
-                <div class="product-card" style="padding: 30px; border-radius: 15px;">
-                    <i class="fa-solid fa-table-tennis-paddle-ball" style="color: var(--primary); font-size: 3.5rem;"></i>
-                    <h3 style="margin-top: 15px;">Kit Ping Pong</h3>
-                    <p style="margin-bottom: 20px;">PP-04 | Disponible</p>
+                <div class="product-card catalog-card">
+                    <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+                    <h3>Kit Ping Pong</h3>
+                    <p>PP-04 | Disponible</p>
                     <a href="crear-ticket.html"><button class="btn-add">Solicitar Ticket</button></a>
                 </div>
 
-                <div class="product-card" style="padding: 30px; border-radius: 15px;">
-                    <i class="fa-solid fa-basketball" style="color: #444; font-size: 3.5rem;"></i>
-                    <h3 style="margin-top: 15px;">Balón Baloncesto</h3>
-                    <p style="margin-bottom: 20px;">BK-02 | En uso</p>
-                    <button class="btn-add" style="background: #222; color: #555; cursor: not-allowed;">No disponible</button>
+                <div class="product-card catalog-card catalog-card--unavailable">
+                    <i class="fa-solid fa-basketball"></i>
+                    <h3>Balón Baloncesto</h3>
+                    <p>BK-02 | En uso</p>
+                    <button class="btn-add btn-disabled" disabled>No disponible</button>
                 </div>
             </div>
         </main>
     </div>
 </body>
 </html>
+
+

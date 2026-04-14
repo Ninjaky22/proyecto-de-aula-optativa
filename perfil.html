@@ -1,14 +1,19 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil | Sport Ticket</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/perfil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <aside class="sidebar">
-        <div class="sidebar-logo"><img src="img/logo.png" alt="Logo"></div>
+        <div class="sidebar-logo">
+            <i class="fa-solid fa-dumbbell"></i>
+            <span>Sport Ticket</span>
+        </div>
         <nav class="sidebar-menu">
             <a href="index.html"><i class="fa-solid fa-house"></i> <span>Catálogo</span></a>
             <a href="mis-tickets.html"><i class="fa-solid fa-ticket"></i> <span>Mis Tickets</span></a>
@@ -20,44 +25,43 @@
     </aside>
 
     <div class="main-wrapper">
-        <header class="top-navbar">
-            <div class="search-bar"></div>
+        <header class="top-navbar no-search">
             <div class="user-profile">
                 <span>Juan Carlos R.</span>
-                <i class="fa-solid fa-circle-user" style="font-size: 1.5rem; color: var(--primary);"></i>
+                <i class="fa-solid fa-circle-user user-avatar"></i>
             </div>
         </header>
 
-        <main class="content-area" style="display: flex; justify-content: center; align-items: flex-start; padding: 60px 20px;">
-            
-            <div class="profile-form" style="width: 100%; max-width: 450px; background: #111; padding: 40px; border-radius: 20px; border: 1px solid #2a2a2a;">
-                
-                <div style="text-align: center; margin-bottom: 40px;">
-                    <i class="fa-solid fa-user-astronaut" style="font-size: 5rem; color: var(--primary);"></i>
-                    <h2 style="margin-top: 15px; color: #fff; font-size: 1.6rem;">Juan Carlos Restrepo</h2>
-                    <p style="color: #777; font-size: 0.9rem;">Ingeniería de Software - FET</p>
+        <main class="content-area profile-content">
+            <div class="profile-form">
+                <div class="profile-header">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                    <h2>Juan Carlos Restrepo</h2>
+                    <p>Ingeniería de Software - FET</p>
                 </div>
 
                 <form>
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Nombre Completo</label>
-                        <input type="text" value="Juan Carlos Restrepo Penagos" readonly style="background: #000; border: 1px solid #333; margin-top: 5px;">
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" value="Juan Carlos Restrepo Penagos" readonly>
                     </div>
-                    
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Correo Institucional</label>
-                        <input type="email" value="juan.restrepo@fet.edu.co" style="background: #000; border: 1px solid #333; margin-top: 5px;">
+
+                    <div class="form-group">
+                        <label>Correo Institucional</label>
+                        <input type="email" value="juan.restrepo@fet.edu.co">
                     </div>
-                    
-                    <div class="form-group" style="margin-bottom: 30px;">
-                        <label style="color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Contraseña</label>
-                        <input type="password" value="********" style="background: #000; border: 1px solid #333; margin-top: 5px;">
+
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" value="********">
                     </div>
-                    
-                    <button type="button" class="btn-add" style="height: 50px; font-size: 1rem; letter-spacing: 1px;">ACTUALIZAR DATOS</button>
+
+                    <button type="button" class="btn-add profile-submit">ACTUALIZAR DATOS</button>
                 </form>
             </div>
         </main>
     </div>
 </body>
 </html>
+
+

@@ -42,12 +42,18 @@ body {
 
 .sidebar-logo {
     padding: 20px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     border-bottom: 1px solid var(--border);
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
-.sidebar-logo img {
-    max-width: 80px;
+.sidebar-logo i {
+    font-size: 1.4rem;
 }
 
 .sidebar-menu {
@@ -88,6 +94,7 @@ body {
     text-decoration: none;
     display: flex;
     align-items: center;
+    gap: 8px;
 }
 
 /* ================= CONTENIDO Y BARRA SUPERIOR ================= */
@@ -106,6 +113,10 @@ body {
     justify-content: space-between;
     padding: 0 30px;
     border-bottom: 1px solid var(--border);
+}
+
+.top-navbar.no-search {
+    justify-content: flex-end;
 }
 
 .search-bar {
@@ -223,6 +234,12 @@ body {
     max-width: 400px;
     border: 1px solid var(--border);
     text-align: center;
+}
+
+.auth-icon {
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 14px;
 }
 
 .auth-card input {

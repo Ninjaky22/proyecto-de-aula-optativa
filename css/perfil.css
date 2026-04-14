@@ -1,0 +1,74 @@
+.user-avatar {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.profile-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+}
+
+.profile-form {
+    width: 100%;
+    max-width: 450px;
+    background: #111;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #2a2a2a;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.profile-header i {
+    font-size: 5rem;
+    color: var(--primary);
+}
+
+.profile-header h2 {
+    margin-top: 15px;
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+.profile-header p {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.profile-form .form-group {
+    margin-bottom: 20px;
+}
+
+.profile-form .form-group:last-of-type {
+    margin-bottom: 30px;
+}
+
+.profile-form label {
+    display: block;
+    color: var(--primary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.profile-form input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    background: #000;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 5px;
+    outline: none;
+}
+
+.profile-submit {
+    height: 50px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
