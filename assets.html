@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Activos | Sport Ticket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/assets.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                <div class="sidebar-titles">
+                    <h2>Sistema IT</h2>
+                    <p class="sidebar-subtitle">Inventario & Tickets</p>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+                <a href="assets.html" class="nav-item active"><i class="fa-solid fa-box"></i> Activos</a>
+                <a href="tickets.html" class="nav-item"><i class="fa-solid fa-ticket"></i> Tickets</a>
+                <a href="reportes.html" class="nav-item"><i class="fa-solid fa-chart-column"></i> Reportes</a>
+                <a href="perfil-admin.html" class="nav-item"><i class="fa-solid fa-user"></i> Mi Perfil</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="header">
+                <div class="header-titles">
+                    <h1>Gestión de Activos</h1>
+                    <p>Inventario completo de implementos y equipos deportivos</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-primary-action">
+                        <i class="fa-solid fa-plus"></i> Agregar Activo
+                    </button>
+                </div>
+            </header>
+
+            <div class="page-container">
+                
+                <div class="card search-card">
+                    <div class="search-wrapper">
+                        <i class="fa-solid fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Buscar por código, nombre o categoría...">
+                    </div>
+                </div>
+
+                <div class="card table-card">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>CÓDIGO</th>
+                                    <th>NOMBRE</th>
+                                    <th>CATEGORÍA</th>
+                                    <th>UBICACIÓN</th>
+                                    <th>ESTADO</th>
+                                    <th>CANT.</th>
+                                    <th class="text-right">ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-row">
+                                    <td class="id-text">DEP-001</td>
+                                    <td class="item-name">Balón de Fútbol Prof.</td>
+                                    <td class="item-category">Fútbol</td>
+                                    <td class="item-location">Almacén A - E3</td>
+                                    <td><span class="badge badge-outline-success">Disponible</span></td>
+                                    <td class="item-qty">15</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon view"><i class="fa-solid fa-eye"></i></button>
+                                            <button class="btn-icon edit"><i class="fa-solid fa-pen"></i></button>
+                                            <button class="btn-icon delete"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="table-row">
+                                    <td class="id-text">DEP-002</td>
+                                    <td class="item-name">Raqueta Wilson</td>
+                                    <td class="item-category">Tenis</td>
+                                    <td class="item-location">Almacén B - E1</td>
+                                    <td><span class="badge badge-outline-primary">En Uso</span></td>
+                                    <td class="item-qty">8</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon view"><i class="fa-solid fa-eye"></i></button>
+                                            <button class="btn-icon edit"><i class="fa-solid fa-pen"></i></button>
+                                            <button class="btn-icon delete"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="table-row">
+                                    <td class="id-text">DEP-003</td>
+                                    <td class="item-name">Red de Voleibol</td>
+                                    <td class="item-category">Voleibol</td>
+                                    <td class="item-location">Almacén A - E5</td>
+                                    <td><span class="badge badge-outline-warning">Mantenimiento</span></td>
+                                    <td class="item-qty">3</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon view"><i class="fa-solid fa-eye"></i></button>
+                                            <button class="btn-icon edit"><i class="fa-solid fa-pen"></i></button>
+                                            <button class="btn-icon delete"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="pagination-info">
+                    <p>Mostrando 3 de 5 activos registrados</p>
+                    <p>Total unidades: 26</p>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+</body>
+</html>

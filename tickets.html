@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Tickets | Sport Ticket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tickets.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                <div class="sidebar-titles">
+                    <h2>Sistema IT</h2>
+                    <p class="sidebar-subtitle">Inventario & Tickets</p>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+                <a href="assets.html" class="nav-item"><i class="fa-solid fa-box"></i> Activos</a>
+                <a href="tickets.html" class="nav-item active"><i class="fa-solid fa-ticket"></i> Tickets</a>
+                <a href="reportes.html" class="nav-item"><i class="fa-solid fa-chart-column"></i> Reportes</a>
+                <a href="perfil-admin.html" class="nav-item"><i class="fa-solid fa-user"></i> Mi Perfil</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="header-titles">
+                    <h1>Gestión de Tickets</h1>
+                    <p>Administra, filtra y actualiza el estado de las solicitudes</p>
+                </div>
+            </header>
+
+            <div class="page-container">
+                
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="filterTickets('all', this)">Todos</button>
+                    <button class="tab-btn" onclick="filterTickets('renta', this)">Rentas</button>
+                    <button class="tab-btn" onclick="filterTickets('mantenimiento', this)">Mantenimiento</button>
+                </div>
+
+                <div class="card table-card">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>TIPO</th>
+                                    <th>ARTÍCULO</th>
+                                    <th>ESTADO</th>
+                                    <th class="text-right">GESTIÓN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="ticket-row" data-type="renta">
+                                    <td class="id-text">#TK-1001</td>
+                                    <td><span class="badge badge-outline-primary">Renta</span></td>
+                                    <td class="item-name">Balón de Fútbol Nike</td>
+                                    <td id="status-TK-1001" class="status-text">Pendiente</td>
+                                    <td class="text-right">
+                                        <button onclick="openModal('#TK-1001', 'Balón de Fútbol Nike', 'renta', 'Carlos Ramirez')" class="btn-detail">
+                                            Ver detalles
+                                        </button>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="ticket-row" data-type="mantenimiento">
+                                    <td class="id-text">#TK-1002</td>
+                                    <td><span class="badge badge-outline-info">Mantenimiento</span></td>
+                                    <td class="item-name">Mesa Ping Pong #2</td>
+                                    <td id="status-TK-1002" class="status-text">Pendiente</td>
+                                    <td class="text-right">
+                                        <button onclick="openModal('#TK-1002', 'Mesa Ping Pong #2', 'mantenimiento', 'Staff IT')" class="btn-detail">
+                                            Ver detalles
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="ticketModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="m-id">Ticket #</h2>
+                <p>Actualiza el estado de la solicitud.</p>
+            </div>
+            <div class="modal-body">
+                <div class="info-row">
+                    <span>Artículo:</span> 
+                    <span id="m-item" class="info-value"></span>
+                </div>
+                <div class="info-row">
+                    <span>Solicitante:</span> 
+                    <span id="m-user" class="info-value"></span>
+                </div>
+                
+                <div class="status-selector">
+                    <label>Estado Actual</label>
+                    <select id="m-select-status" class="select-custom">
+                        </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeModal()" class="btn-cancel">Cancelar</button>
+                <button onclick="saveStatus()" class="btn-save">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTicketId = '';
+
+        function filterTickets(type, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.ticket-row').forEach(row => {
+                row.style.display = (type === 'all' || row.getAttribute('data-type') === type) ? 'table-row' : 'none';
+            });
+        }
+
+        function openModal(id, item, type, user) {
+            currentTicketId = id;
+            document.getElementById('m-id').innerText = "Ticket " + id;
+            document.getElementById('m-item').innerText = item;
+            document.getElementById('m-user').innerText = user;
+
+            const select = document.getElementById('m-select-status');
+            select.innerHTML = ''; 
+
+            if (type === 'renta') {
+                select.innerHTML = `
+                    <option value="Pendiente por aprobación">Pendiente por aprobación</option>
+                    <option value="Aprobado">Aprobado</option>
+                    <option value="Denegado">Denegado</option>
+                `;
+            } else {
+                select.innerHTML = `
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Gestionado">Gestionado</option>
+                `;
+            }
+
+            document.getElementById('ticketModal').style.display = 'flex';
+        }
+
+        function saveStatus() {
+            const newStatus = document.getElementById('m-select-status').value;
+            const statusCellId = 'status-' + currentTicketId.replace('#', '');
+            document.getElementById(statusCellId).innerText = newStatus;
+            
+            // Opcional: Agregar una pequeña animación de éxito o cambio de color aquí
+            document.getElementById(statusCellId).style.color = 'var(--primary)';
+            
+            closeModal();
+        }
+
+        function closeModal() { 
+            document.getElementById('ticketModal').style.display = 'none'; 
+        }
+
+        // Cerrar modal al hacer clic fuera de la tarjeta
+        window.onclick = function(event) {
+            const modal = document.getElementById('ticketModal');
+            if (event.target == modal) closeModal();
+        }
+    </script>
+</body>
+</html>

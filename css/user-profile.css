@@ -1,0 +1,184 @@
+/* =========================================
+   ESTILOS ESPECÍFICOS: MI PERFIL (USUARIO)
+   ========================================= */
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* --- Columna de Información --- */
+.user-main-card {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    background: rgba(88, 255, 10, 0.05);
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--primary);
+}
+
+.user-main-card h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.user-role {
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.user-details-list {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detail-item .label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-item .value {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* --- Estadísticas --- */
+.stats-summary-card h3 {
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.mini-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.mini-stat {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 15px 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-num {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.stat-desc {
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+/* --- Logros (Achievements) --- */
+.achievements-card h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.section-header {
+    margin-bottom: 30px;
+}
+
+.section-header p {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.achievement-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px 15px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.achievement-item:hover:not(.locked) {
+    background: rgba(88, 255, 10, 0.05);
+    border-color: var(--primary);
+    transform: translateY(-5px);
+}
+
+.achievement-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.achievement-item h4 {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.achievement-item p {
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* Logros Bloqueados */
+.achievement-item.locked {
+    opacity: 0.4;
+    filter: grayscale(1);
+    cursor: not-allowed;
+}
+
+.achievement-item.locked .achievement-icon {
+    font-size: 1.5rem;
+    color: var(--muted);
+}
+
+/* --- Utilidades --- */
+.text-primary {
+    color: var(--primary);
+}
+
+/* --- Responsividad --- */
+@media (max-width: 900px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .user-main-card {
+        padding-top: 25px;
+    }
+}

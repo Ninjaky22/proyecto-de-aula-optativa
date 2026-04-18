@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil | Sport Ticket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/user-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="background-color: #000;">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon"><i class="fa-solid fa-store"></i></div>
+                <div><h2 style="font-size: 1.1rem;">Sport Ticket</h2><p style="color: var(--muted); font-size: 0.8rem;">Portal de Usuario</p></div>
+            </div>
+            <nav class="nav-menu">
+                <a href="user-catalog.html" class="nav-item"><i class="fa-solid fa-shopping-bag"></i> Dashboard</a>
+                <a href="user-rentals.html" class="nav-item"><i class="fa-solid fa-calendar-days"></i> Mis Rentas</a>
+                <a href="user-cart.html" class="nav-item"><i class="fa-solid fa-cart-shopping"></i> Carrito</a>
+                <a href="user-profile.html" class="nav-item active"><i class="fa-solid fa-user"></i> Mi Perfil</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header"><h1 style="font-size: 1.6rem;">Configuración de Perfil</h1></header>
+            <div class="page-container" style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
+                
+                <div class="profile-sidebar">
+                    <div class="card" style="text-align: center; padding: 30px;">
+                        <div style="width: 100px; height: 100px; background: rgba(88,255,10,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 3rem; color: var(--primary); border: 2px solid var(--border);"><i class="fa-solid fa-user-astronaut"></i></div>
+                        <h2 style="color: #fff;">Juan Pérez</h2>
+                        <p style="color: var(--primary); font-size: 0.9rem; font-weight: 600;">Usuario Premium</p>
+                        <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+                        <div style="text-align: left; font-size: 0.9rem;">
+                            <p style="margin-bottom: 10px;"><span style="color: var(--muted);">Email:</span> <br> <span style="color: #fff;">juan.perez@email.com</span></p>
+                            <p><span style="color: var(--muted);">Teléfono:</span> <br> <span style="color: #fff;">+57 310 000 0000</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-main">
+                    <div class="card" style="margin-bottom: 25px;">
+                        <h3 style="color: #fff; margin-bottom: 20px;"><i class="fa-solid fa-shield-halved text-primary"></i> Seguridad de la Cuenta</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <div>
+                                <p style="color: #fff; font-weight: 500;">Contraseña</p>
+                                <p style="color: var(--muted); font-size: 0.8rem;">Último cambio: hace 3 meses</p>
+                            </div>
+                            <button class="btn btn-outline" style="padding: 8px 15px; font-size: 0.8rem;">Actualizar</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="color: #fff; margin-bottom: 20px;"><i class="fa-solid fa-chart-line text-primary"></i> Estadísticas de Uso</h3>
+                        <div style="background: #111; padding: 25px; border-radius: 8px; text-align: center; border: 1px solid var(--border);">
+                            <span style="display: block; font-size: 2.2rem; font-weight: bold; color: var(--primary);">24</span>
+                            <span style="font-size: 0.9rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;">Rentas Totales</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

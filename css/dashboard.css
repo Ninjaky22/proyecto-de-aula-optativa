@@ -1,8 +1,383 @@
-.dashboard-action {
-    padding: 5px 10px;
+/* =========================================
+   ESTILOS ESPECÍFICOS: DASHBOARD
+   ========================================= */
+
+/* --- Layout de la Barra Lateral y Header --- */
+.header-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* --- Botón Perfil de Administrador (Mejorado) --- */
+.user-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 16px 6px 6px;
+    border-radius: 30px;
+    /* Forma de píldora */
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.user-profile-btn:hover {
+    border-color: var(--primary);
+    background: rgba(250, 204, 21, 0.05);
+    /* Brillo tenue en hover */
+}
+
+.user-profile-btn .avatar-circle {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.user-profile-btn .user-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* --- Grillas (Grids) --- */
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* --- Tarjetas de Métricas --- */
+.metric-card {
+    padding: 20px;
+    margin-bottom: 0;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.metric-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.metric-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.metric-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+/* --- Tarjetas de Listas (Tickets / Activos) --- */
+.list-card {
+    padding: 0;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.list-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.list-item {
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: 0.2s;
     cursor: pointer;
 }
 
-.dashboard-action-danger {
-    color: red;
+.border-hover-primary:hover {
+    border-color: rgba(250, 204, 21, 0.4);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.item-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.item-id {
+    font-family: monospace;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.item-title {
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.item-subtitle {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.item-footer {
+    font-size: 0.75rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* --- Barras de Progreso --- */
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.progress-label {
+    color: var(--muted);
+}
+
+.progress-value {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.progress-track {
+    width: 100%;
+    background: #374151;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.w-13 {
+    width: 13.3%;
+}
+
+.w-37 {
+    width: 37.5%;
+}
+
+.w-75 {
+    width: 75%;
+}
+
+/* --- Tarjetas Resumen (Fila Inferior) --- */
+.summary-card {
+    padding: 25px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-label {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.summary-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* --- Utilidades de Color --- */
+.text-primary {
+    color: var(--primary);
+}
+
+.text-warning {
+    color: #facc15;
+}
+
+.text-danger {
+    color: #f87171;
+}
+
+.text-success {
+    color: #4ade80;
+}
+
+.icon-primary {
+    color: var(--primary);
+}
+
+.icon-warning {
+    color: #facc15;
+}
+
+.icon-danger {
+    color: #f87171;
+}
+
+.icon-success {
+    color: #4ade80;
+}
+
+.icon-info {
+    color: #60a5fa;
+}
+
+.icon-md {
+    font-size: 1.2rem;
+}
+
+.icon-xl {
+    font-size: 2rem;
+}
+
+.bg-danger {
+    background: #ef4444;
+}
+
+.bg-warning {
+    background: #eab308;
+}
+
+.bg-success {
+    background: #22c55e;
+}
+
+/* --- Badges Estilizados --- */
+.badge-outline-primary {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.badge-outline-warning {
+    background: transparent;
+    color: #facc15;
+    border: 1px solid rgba(250, 204, 21, 0.3);
+}
+
+.badge-outline-danger {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge-outline-info {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.badge-outline-success {
+    background: transparent;
+    color: #4ade80;
+    border: 1px solid #4ade80;
+}
+
+.badge-solid-primary {
+    background: var(--primary);
+    color: #000;
+    border: none;
+}
+
+.badge-soft-warning {
+    background: rgba(234, 179, 8, 0.2);
+    color: #facc15;
+    border: none;
+}
+
+.badge-soft-info {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    border: none;
+}
+
+.badge-soft-danger {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: none;
+}
+
+.badge-soft-success {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+    border: none;
+}
+
+/* --- Responsividad --- */
+@media (max-width: 1024px) {
+
+    .grid-4,
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .grid-4,
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
 }

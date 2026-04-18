@@ -2,28 +2,60 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro | Sport Ticket</title>
-    <link rel="stylesheet" href="css/main.css">
+    <title>Crear Cuenta | Sport Ticket</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/registro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="auth-container">
-    <div class="auth-card">
-        <h2 class="auth-title">Crear Cuenta</h2>
-        <p class="auth-subtitle">Ingresa tus datos de estudiante</p>
+<body>
+    <div class="signup-wrapper">
+        <div class="signup-card">
+            
+            <div class="logo-box">
+                <i class="fa-solid fa-dumbbell"></i>
+            </div>
+            
+            <h2>Crea tu cuenta</h2>
+            <p class="subtitle">Únete a la plataforma líder en gestión y renta de implementos deportivos.</p>
 
-        <form action="login.html">
-            <input type="text" placeholder="Nombre completo" required>
-            <input type="email" placeholder="Correo FET" required>
-            <input type="password" placeholder="Contraseña" required>
-            <button type="submit" class="btn-add">Registrarme</button>
-        </form>
+            <form action="login.html">
+                
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" placeholder="Nombre completo" required>
+                </div>
 
-        <div class="auth-links">
-            <a href="login.html">Volver al inicio de sesión</a>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" placeholder="Correo electrónico" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Contraseña" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-shield-check"></i>
+                    <input type="password" placeholder="Confirmar contraseña" required>
+                </div>
+
+                <div class="terms-check">
+                    <label class="checkbox-container">
+                        <input type="checkbox" required>
+                        <span class="checkmark"></span>
+                        Acepto los <a href="#">Términos y Condiciones</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-signup">Registrarse</button>
+            </form>
+
+            <div class="login-link">
+                ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a>
+            </div>
+            
         </div>
     </div>
 </body>
 </html>
-
-

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo | Sport Ticket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/user-catalog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="background-color: #000;">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon"><i class="fa-solid fa-store"></i></div>
+                <div>
+                    <h2 style="font-size: 1.1rem;">Sport Ticket</h2>
+                    <p style="color: var(--muted); font-size: 0.8rem;">Portal de Usuario</p>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="user-catalog.html" class="nav-item active"><i class="fa-solid fa-shopping-bag"></i> Dashboard</a>
+                <a href="user-rentals.html" class="nav-item"><i class="fa-solid fa-calendar-days"></i> Mis Rentas</a>
+                <a href="user-cart.html" class="nav-item"><i class="fa-solid fa-cart-shopping"></i> Carrito</a>
+                <a href="user-profile.html" class="nav-item"><i class="fa-solid fa-user"></i> Mi Perfil</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="header-titles">
+                    <h1 style="font-size: 1.6rem;">Catálogo Deportivo</h1>
+                    <p style="color: var(--muted); font-size: 0.9rem;">Explora y solicita implementos</p>
+                </div>
+            </header>
+
+            <div class="page-container">
+                <div class="catalog-filters" style="display: flex; gap: 10px; margin-bottom: 30px;">
+                    <button class="filter-btn active">Todos</button>
+                    <button class="filter-btn">Fútbol</button>
+                    <button class="filter-btn">Tenis</button>
+                    <button class="filter-btn">Voleibol</button>
+                    <button class="filter-btn">Boxeo</button>
+                </div>
+
+                <div class="catalog-grid">
+                    <div class="product-card">
+                        <div class="product-image"><i class="fa-solid fa-futbol"></i></div>
+                        <div class="product-info">
+                            <h3>Balón de Fútbol Nike</h3>
+                            <div class="price" style="font-size: 1.5rem; font-weight: bold; color: var(--primary); margin: 15px 0;">
+                                $15.000 <span style="font-size: 0.8rem; color: var(--muted);">COP / día</span>
+                            </div>
+                            <button class="btn btn-action-catalog">Añadir a la renta</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image"><i class="fa-solid fa-table-tennis-paddle-ball"></i></div>
+                        <div class="product-info">
+                            <h3>Raqueta Wilson</h3>
+                            <div class="price" style="font-size: 1.5rem; font-weight: bold; color: var(--primary); margin: 15px 0;">
+                                $25.000 <span style="font-size: 0.8rem; color: var(--muted);">COP / día</span>
+                            </div>
+                            <button class="btn btn-action-catalog">Añadir a la renta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

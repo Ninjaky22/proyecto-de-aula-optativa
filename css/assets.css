@@ -1,0 +1,165 @@
+/* =========================================
+   ESTILOS ESPECÍFICOS: GESTIÓN DE ACTIVOS
+   ========================================= */
+
+/* --- Botón del Header --- */
+.btn-primary-action {
+    background: var(--primary);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-primary-action:hover {
+    background: #eab308;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(250, 204, 21, 0.2);
+}
+
+/* --- Barra de Búsqueda --- */
+.search-card {
+    padding: 15px;
+    margin-bottom: 25px;
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 12px 12px 45px;
+    background: rgba(0, 0, 0, 0.5); /* Negro sutil para el input */
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: #fff;
+    outline: none;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.search-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.2);
+}
+
+/* --- Contenedor de la Tabla --- */
+.table-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table-row {
+    transition: background 0.2s;
+}
+
+.table-row:hover {
+    background: rgba(255, 255, 255, 0.03); /* Efecto hover en la fila */
+}
+
+/* --- Tipografía de la Tabla --- */
+.id-text {
+    font-family: monospace;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.item-name {
+    font-weight: 500;
+    color: #fff;
+}
+
+.item-category {
+    color: #9ca3af;
+}
+
+.item-location {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.item-qty {
+    font-weight: 600;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* --- Botones de Acción (Iconos) --- */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon.view, .btn-icon.edit {
+    color: #9ca3af;
+}
+
+/* Colores al hacer hover en los botones */
+.btn-icon.view:hover { 
+    color: #60a5fa; 
+    background: rgba(96, 165, 250, 0.1); 
+}
+
+.btn-icon.edit:hover { 
+    color: var(--primary); 
+    background: rgba(250, 204, 21, 0.1); 
+}
+
+.btn-icon.delete {
+    color: #ef4444;
+}
+
+.btn-icon.delete:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* --- Info Inferior (Paginación) --- */
+.pagination-info {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    color: #9ca3af;
+    font-size: 0.85rem;
+}
+
+/* --- Badges de la Tabla (Estilo Corporativo) --- */
+.badge-outline-success { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
+.badge-outline-primary { background: rgba(250, 204, 21, 0.1); color: var(--primary); border: 1px solid rgba(250, 204, 21, 0.3); }
+.badge-outline-warning { background: rgba(234, 179, 8, 0.1); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3); }

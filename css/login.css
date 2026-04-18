@@ -1,10 +1,155 @@
-.auth-title {
-    color: var(--primary);
-    margin-bottom: 5px;
+/* =========================================
+   ESTILOS ESPECÍFICOS: LOGIN
+   ========================================= */
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-.auth-subtitle {
-    color: var(--text-muted);
-    margin-bottom: 25px;
+.login-card {
+    background: #0a0a0a; /* Negro oscuro sólido */
+    border: 1px solid rgba(250, 204, 21, 0.2); /* Borde amarillo suave */
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
+}
+
+.logo-box {
+    margin-bottom: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: rgba(250, 204, 21, 0.1);
+    border: 1px solid rgba(250, 204, 21, 0.3);
+}
+
+.logo-box i {
+    font-size: 1.8rem;
+    color: #facc15;
+}
+
+.login-card h2 {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.login-card .subtitle {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+}
+
+/* --- Formulario e Inputs --- */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 14px 14px 45px;
+    background: #000; /* Input negro puro */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #facc15;
+}
+
+.input-group input:focus + i,
+.input-group input:valid + i {
+    color: #facc15;
+}
+
+/* --- Acciones Adicionales (Checkbox y Link) --- */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 0.85rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    color: #9ca3af;
+    cursor: pointer;
+    gap: 8px;
+}
+
+.forgot-password {
+    color: #facc15;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.forgot-password:hover {
+    color: #eab308;
+    text-decoration: underline;
+}
+
+/* --- Botón de Ingreso --- */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 1rem;
+    background: #facc15;
+    color: #000;
+}
+
+.btn-login:hover {
+    background: #eab308;
+    transform: translateY(-2px);
+}
+
+/* --- Enlace de Registro --- */
+.signup-link {
+    margin-top: 25px;
     font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+.signup-link a {
+    color: #facc15;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.signup-link a:hover {
+    color: #eab308;
+    text-decoration: underline;
 }

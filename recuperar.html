@@ -2,26 +2,37 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar Contraseña</title>
-    <link rel="stylesheet" href="css/main.css">
+    <title>Recuperar Contraseña | Sport Ticket</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/recuperar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="auth-container">
-    <div class="auth-card">
-        <h2 class="auth-title">Recuperar acceso</h2>
-        <p class="auth-subtitle">Te enviaremos un código a tu correo</p>
+<body>
+    <div class="recovery-wrapper">
+        <div class="recovery-card">
+            
+            <div class="logo-box">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            
+            <h2>Recuperar Contraseña</h2>
+            <p class="subtitle">Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu acceso a la plataforma.</p>
 
-        <form action="login.html">
-            <input type="email" placeholder="Correo electrónico" required>
-            <button type="submit" class="btn-add">Enviar código</button>
-        </form>
+            <form action="login.html">
+                
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" placeholder="Correo electrónico" required>
+                </div>
 
-        <div class="auth-links">
-            <a href="login.html">Cancelar y volver</a>
+                <button type="submit" class="btn-recovery">Enviar Enlace</button>
+            </form>
+
+            <div class="back-link">
+                <a href="login.html"><i class="fa-solid fa-arrow-left"></i> Volver al inicio de sesión</a>
+            </div>
+            
         </div>
     </div>
 </body>
 </html>
-
-

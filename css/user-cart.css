@@ -1,0 +1,211 @@
+/* =========================================
+   ESTILOS ESPECÍFICOS: CARRITO (USUARIO)
+   ========================================= */
+
+/* --- Layout del Carrito --- */
+.cart-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* 2 tercios para artículos, 1 tercio para resumen */
+    gap: 25px;
+    align-items: start;
+    /* Importante para que la tarjeta resumen funcione con sticky */
+}
+
+.cart-items-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* --- Tarjetas de Artículo --- */
+.cart-item-card {
+    padding: 20px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.item-visual {
+    width: 65px;
+    height: 65px;
+    background: rgba(88, 255, 10, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.item-info {
+    flex-grow: 1;
+}
+
+.item-info h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.item-info p {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+/* --- Controles de Cantidad --- */
+.item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.qty-btn {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.2s;
+    font-size: 0.9rem;
+}
+
+.qty-btn:hover {
+    color: var(--primary);
+}
+
+.item-quantity input {
+    width: 30px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    outline: none;
+}
+
+/* --- Precio y Acciones --- */
+.item-price {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.2rem;
+    min-width: 80px;
+    text-align: right;
+}
+
+.btn-remove {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    /* Rojo peligro */
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.btn-remove:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* --- Tarjeta de Resumen (Derecha) --- */
+.summary-card {
+    position: sticky;
+    top: 100px;
+    /* Se queda pegada en la parte alta de la pantalla */
+    margin-bottom: 0;
+}
+
+.summary-card h3 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.separator {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+    opacity: 0.5;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.total-row {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.text-primary {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+/* Botón de Pago Ancho */
+.btn-block {
+    width: 100%;
+    justify-content: center;
+    padding: 15px;
+    font-size: 1.05rem;
+}
+
+/* Alerta de pago seguro */
+.secure-checkout {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: rgba(88, 255, 10, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 1px solid rgba(88, 255, 10, 0.1);
+}
+
+.secure-checkout i {
+    color: var(--primary);
+    margin-right: 5px;
+}
+
+/* --- Responsividad --- */
+@media (max-width: 1024px) {
+    .cart-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-card {
+        position: static;
+    }
+
+    /* Quita el sticky en móviles */
+}
+
+@media (max-width: 600px) {
+    .cart-item-card {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .item-info {
+        width: 100%;
+        order: -1;
+        margin-bottom: 10px;
+    }
+}

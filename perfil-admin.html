@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil | Sport Ticket</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/perfil-admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                <div class="sidebar-titles">
+                    <h2>Sistema IT</h2>
+                    <p class="sidebar-subtitle">Inventario & Tickets</p>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+                <a href="assets.html" class="nav-item"><i class="fa-solid fa-box"></i> Activos</a>
+                <a href="tickets.html" class="nav-item"><i class="fa-solid fa-ticket"></i> Tickets</a>
+                <a href="reportes.html" class="nav-item"><i class="fa-solid fa-chart-column"></i> Reportes</a>
+                <a href="perfil-admin.html" class="nav-item active"><i class="fa-solid fa-user"></i> Mi Perfil</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="header">
+                <div class="header-titles">
+                    <h1>Mi Perfil</h1>
+                    <p>Información personal y estadísticas de uso</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-primary-action">
+                        Exportar Reporte
+                    </button>
+                </div>
+            </header>
+
+            <div class="page-container">
+                
+                <div class="profile-grid">
+                    
+                    <div class="card profile-card">
+                        <div class="profile-header-info">
+                            <div class="profile-avatar">AD</div>
+                            <h3>Admin Usuario</h3>
+                            <span class="badge badge-solid-primary mt-5">Administrador</span>
+                        </div>
+
+                        <div class="profile-details">
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span class="info-value">admin@sportticket.com</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Departamento</span>
+                                <span class="info-value">Soporte IT</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Miembro desde</span>
+                                <span class="info-value">Enero 2024</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary-action w-full justify-center">
+                            Editar Perfil
+                        </button>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="card stat-card">
+                            <div>
+                                <p class="stat-label">Tickets Totales</p>
+                                <p class="stat-value text-primary">200</p>
+                                <p class="stat-trend text-success">+24 este mes</p>
+                            </div>
+                            <i class="fa-solid fa-ticket stat-icon text-primary"></i>
+                        </div>
+
+                        <div class="card stat-card">
+                            <div>
+                                <p class="stat-label">Tasa de Resolución</p>
+                                <p class="stat-value text-primary">96.5%</p>
+                                <p class="stat-trend text-success">+2.3% vs promedio</p>
+                            </div>
+                            <i class="fa-solid fa-circle-check stat-icon text-success"></i>
+                        </div>
+
+                        <div class="card stat-card">
+                            <div>
+                                <p class="stat-label">Tiempo Promedio</p>
+                                <p class="stat-value text-primary">1.9h</p>
+                                <p class="stat-trend text-info">24% más rápido</p>
+                            </div>
+                            <i class="fa-solid fa-clock stat-icon text-info"></i>
+                        </div>
+
+                        <div class="card stat-card">
+                            <div>
+                                <p class="stat-label">Racha Actual</p>
+                                <p class="stat-value text-primary">15 días</p>
+                                <p class="stat-trend text-warning">Récord personal</p>
+                            </div>
+                            <i class="fa-solid fa-fire stat-icon text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lower-grid">
+                    
+                    <div class="card">
+                        <h3 class="section-title"><i class="fa-solid fa-list-check text-primary"></i> Actividad Reciente</h3>
+                        <p class="section-subtitle">Tus últimas acciones en el sistema</p>
+                        
+                        <div class="activity-list">
+                            <div class="activity-item border-primary-light">
+                                <i class="fa-solid fa-box activity-icon text-primary"></i>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <span class="activity-name">Aprobó Renta Balón de Fútbol</span>
+                                        <span class="activity-time">Hace 2 hrs</span>
+                                    </div>
+                                    <p class="activity-desc">Ticket #TK-1001 gestionado exitosamente.</p>
+                                </div>
+                            </div>
+
+                            <div class="activity-item border-info-light">
+                                <i class="fa-solid fa-wrench activity-icon text-info"></i>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <span class="activity-name">Actualizó Mantenimiento Ping Pong</span>
+                                        <span class="activity-time">Hace 5 hrs</span>
+                                    </div>
+                                    <p class="activity-desc">Estado cambiado a "En Proceso".</p>
+                                </div>
+                            </div>
+
+                            <div class="activity-item border-neutral">
+                                <i class="fa-solid fa-right-to-bracket activity-icon text-muted"></i>
+                                <div class="activity-content">
+                                    <div class="activity-header">
+                                        <span class="activity-name">Inicio de sesión</span>
+                                        <span class="activity-time">Hoy, 08:00 AM</span>
+                                    </div>
+                                    <p class="activity-desc">Acceso desde IP local.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="section-title"><i class="fa-solid fa-award text-primary"></i> Logros y Metas</h3>
+                        <p class="section-subtitle">Tu progreso y reconocimientos</p>
+
+                        <div class="achievement-grid">
+                            <div class="achievement-card">
+                                <div class="achievement-icon">🏆</div>
+                                <h4 class="achievement-title text-primary">Resolutor Veloz</h4>
+                                <p class="achievement-desc">Resolviste 50 tickets rápidos</p>
+                            </div>
+
+                            <div class="achievement-card">
+                                <div class="achievement-icon">🔥</div>
+                                <h4 class="achievement-title text-primary">Imparable</h4>
+                                <p class="achievement-desc">Racha de 10 días seguidos</p>
+                            </div>
+
+                            <div class="achievement-card">
+                                <div class="achievement-icon">⭐</div>
+                                <h4 class="achievement-title text-primary">Calidad 5 Estrellas</h4>
+                                <p class="achievement-desc">100% de aprobación</p>
+                            </div>
+
+                            <div class="achievement-card locked">
+                                <div class="achievement-icon text-muted"><i class="fa-solid fa-lock"></i></div>
+                                <h4 class="achievement-title text-white">Maestro de Activos</h4>
+                                <p class="achievement-desc">Gestionar 500 activos</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

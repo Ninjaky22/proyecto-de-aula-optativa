@@ -2,30 +2,51 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión | Sport Ticket</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="auth-container">
-    <div class="auth-card">
-        <i class="fa-solid fa-dumbbell auth-icon"></i>
-        <h2 class="auth-title">Sport Ticket</h2>
-        <p class="auth-subtitle">FET - Ingeniería de Software</p>
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            
+            <div class="logo-box">
+                <i class="fa-solid fa-dumbbell"></i>
+            </div>
+            
+            <h2>Bienvenido de vuelta</h2>
+            <p class="subtitle">Ingresa tus credenciales para acceder a la plataforma.</p>
 
-        <form action="index.html">
-            <input type="email" placeholder="Correo institucional" required>
-            <input type="password" placeholder="Contraseña" required>
-            <button type="submit" class="btn-add">Ingresar</button>
-        </form>
+            <form action="seleccion-rol.html">
+                
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" placeholder="Correo electrónico" required>
+                </div>
 
-        <div class="auth-links">
-            <a href="registro.html">¿No tienes cuenta? Regístrate aquí</a>
-            <a href="recuperar.html">¿Olvidaste tu contraseña?</a>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Contraseña" required>
+                </div>
+
+                <div class="form-actions">
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        Recordar sesión
+                    </label>
+                    <a href="recuperar.html" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="submit" class="btn-login">Iniciar Sesión</button>
+            </form>
+
+            <div class="signup-link">
+                ¿No tienes una cuenta? <a href="registro.html">Regístrate aquí</a>
+            </div>
+            
         </div>
     </div>
 </body>
 </html>
-
-
