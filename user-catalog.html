@@ -32,7 +32,7 @@
             <header class="header">
                 <div class="header-titles">
                     <h1 style="font-size: 1.6rem;">Catálogo Deportivo</h1>
-                    <p style="color: var(--muted); font-size: 0.9rem;">Explora y solicita implementos</p>
+                    <p style="color: var(--muted); font-size: 0.9rem;">Selecciona tus artículos y define el tiempo de renta</p>
                 </div>
             </header>
 
@@ -44,7 +44,6 @@
                     <button class="filter-btn">Voleibol</button>
                     <button class="filter-btn">Boxeo</button>
                 </div>
-
                 <div class="catalog-grid">
                     <div class="product-card">
                         <div class="product-image"><i class="fa-solid fa-futbol"></i></div>
@@ -53,9 +52,10 @@
                             <div class="price" style="font-size: 1.5rem; font-weight: bold; color: var(--primary); margin: 15px 0;">
                                 $15.000 <span style="font-size: 0.8rem; color: var(--muted);">COP / día</span>
                             </div>
-                            <button class="btn btn-action-catalog">Añadir a la renta</button>
+                            <button class="btn btn-action-catalog" onclick="openRentModal('Balón de Fútbol Nike')">Opciones de renta</button>
                         </div>
                     </div>
+
                     <div class="product-card">
                         <div class="product-image"><i class="fa-solid fa-table-tennis-paddle-ball"></i></div>
                         <div class="product-info">
@@ -63,12 +63,65 @@
                             <div class="price" style="font-size: 1.5rem; font-weight: bold; color: var(--primary); margin: 15px 0;">
                                 $25.000 <span style="font-size: 0.8rem; color: var(--muted);">COP / día</span>
                             </div>
-                            <button class="btn btn-action-catalog">Añadir a la renta</button>
+                            <button class="btn btn-action-catalog" onclick="openRentModal('Raqueta Wilson')">Opciones de renta</button>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <div id="rentModal" class="modal-renta">
+        <div class="modal-content">
+            <h2 id="modalTitle" style="color: var(--primary); margin-bottom: 10px;">Configurar Renta</h2>
+            <p style="color: var(--muted); font-size: 0.9rem;">¿Cuántos días deseas rentar este artículo?</p>
+            
+            <div class="days-selector">
+                <button onclick="changeDays(-1)" class="btn-outline" style="padding: 5px 15px;"><i class="fa-solid fa-minus"></i></button>
+                <input type="number" id="rentDays" class="qty-input" value="1" min="1">
+                <button onclick="changeDays(1)" class="btn-outline" style="padding: 5px 15px;"><i class="fa-solid fa-plus"></i></button>
+            </div>
+
+            <div class="modal-btns">
+                <button class="btn btn-primary" onclick="addToCart()" style="width: 100%;">Añadir al carrito</button>
+                <button class="btn-remove" onclick="closeRentModal()" style="background: none; border: none; color: var(--muted); cursor: pointer; margin-top: 10px;">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('rentModal');
+        const daysInput = document.getElementById('rentDays');
+        const modalTitle = document.getElementById('modalTitle');
+
+        function openRentModal(itemName) {
+            modalTitle.innerText = itemName;
+            daysInput.value = 1;
+            modal.style.display = 'flex';
+        }
+
+        function closeRentModal() {
+            modal.style.display = 'none';
+        }
+
+        function changeDays(amt) {
+            let current = parseInt(daysInput.value);
+            if (current + amt >= 1) {
+                daysInput.value = current + amt;
+            }
+        }
+
+        function addToCart() {
+            alert(`Añadido al carrito por ${daysInput.value} día(s).`);
+            closeRentModal();
+        }
+
+        // Cerrar al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeRentModal();
+            }
+        }
+    </script>
 </body>
 </html>
