@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/registro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/auth.js" defer></script>
 </head>
 <body>
     <div class="signup-wrapper">
@@ -18,26 +19,28 @@
             <h2>Crea tu cuenta</h2>
             <p class="subtitle">Únete a la plataforma líder en gestión y renta de implementos deportivos.</p>
 
-            <form action="login.html">
+            <form onsubmit="registrarUsuario(event)">
                 
                 <div class="input-group">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" placeholder="Nombre completo" required>
+                    <input type="text" id="reg-nombre" placeholder="Nombre completo" required>
                 </div>
 
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="email" id="reg-email" placeholder="Correo electrónico" required>
                 </div>
 
-                <div class="input-group">
+                <div class="input-group" style="position: relative;">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Contraseña" required>
+                    <input type="password" id="reg-password" placeholder="Contraseña" required style="padding-right: 45px;">
+                    <i class="fa-solid fa-eye" id="icon-reg-pass" onclick="togglePassword('reg-password', 'icon-reg-pass')" style="position: absolute; right: 15px; left: auto; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--muted); z-index: 10; pointer-events: auto;"></i>
                 </div>
 
-                <div class="input-group">
+                <div class="input-group" style="position: relative;">
                     <i class="fa-solid fa-shield-check"></i>
-                    <input type="password" placeholder="Confirmar contraseña" required>
+                    <input type="password" id="reg-confirm" placeholder="Confirmar contraseña" required style="padding-right: 45px;">
+                    <i class="fa-solid fa-eye" id="icon-reg-confirm" onclick="togglePassword('reg-confirm', 'icon-reg-confirm')" style="position: absolute; right: 15px; left: auto; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--muted); z-index: 10; pointer-events: auto;"></i>
                 </div>
 
                 <div class="terms-check">

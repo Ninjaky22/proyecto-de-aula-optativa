@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/user-rentals.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/guardian.js"></script>
 </head>
 <body style="background-color: #000;">
     <div class="dashboard-layout">
@@ -21,7 +22,7 @@
                 <a href="user-profile.html" class="nav-item"><i class="fa-solid fa-user"></i> Mi Perfil</a>
             </nav>
             <div class="sidebar-footer">
-                <a href="login.html" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+                <a href="#" onclick="cerrarSesion()" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
             </div>
         </aside>
 
@@ -29,27 +30,13 @@
             <header class="header">
                 <h1 style="font-size: 1.6rem;">Mis Rentas Activas</h1>
             </header>
-            <div class="page-container">
-                <div class="card rental-card border-active">
-                    <div class="rental-main-info" style="display: flex; justify-content: space-between; align-items: center; padding: 25px;">
-                        <div style="display: flex; gap: 20px; align-items: center;">
-                            <div class="item-visual"><i class="fa-solid fa-futbol text-primary"></i></div>
-                            <div>
-                                <h3 style="color: #fff; margin-bottom: 5px;">Balón de Fútbol Nike</h3>
-                                <p style="color: var(--muted); font-size: 0.85rem;">Alquilado el: 15 Abr, 2026</p>
-                                <p style="color: #facc15; font-size: 0.9rem; font-weight: 600; margin-top: 5px;">
-                                    <i class="fa-regular fa-calendar-check"></i> Vence el: 20 Abr, 2026
-                                </p>
-                            </div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 1.6rem; font-weight: bold; color: var(--primary);">$45.000</div>
-                            <div style="font-size: 0.8rem; color: var(--muted);">COP Total</div>
-                        </div>
-                    </div>
-                </div>
+            
+            <div class="page-container" id="rentas-container">
+                <p style="color: white; text-align: center; margin-top: 20px;">Cargando tus rentas...</p>
             </div>
         </main>
     </div>
+
+    <script src="js/user-rentals.js"></script>
 </body>
 </html>

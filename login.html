@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body style="background-color: #000;">
     <div class="login-wrapper">
         <div class="login-card">
             
@@ -15,38 +15,43 @@
                 <i class="fa-solid fa-dumbbell"></i>
             </div>
             
-            <h2>Bienvenido de vuelta</h2>
-            <p class="subtitle">Ingresa tus credenciales para acceder a la plataforma.</p>
+            <h2 style="color: #fff; margin-bottom: 10px;">Iniciar Sesión</h2>
+            <p style="color: var(--muted); margin-bottom: 30px; font-size: 0.9rem;">Ingresa tus credenciales para acceder a tu cuenta.</p>
 
-            <form action="seleccion-rol.html">
+            <div id="login-mensaje" style="display: none; padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-size: 0.9rem; font-weight: 600;"></div>
+
+            <form onsubmit="iniciarSesion(event)">
                 
                 <div class="input-group">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="email" id="login-email" placeholder="Correo electrónico" required>
                 </div>
 
-                <div class="input-group">
+                <div class="input-group" style="position: relative;">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Contraseña" required>
+                    <input type="password" id="login-password" placeholder="Contraseña" required style="padding-right: 45px;">
+                    <i class="fa-solid fa-eye" id="icon-login-pass" onclick="togglePassword('login-password', 'icon-login-pass')" style="position: absolute; right: 15px; left: auto; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--muted); z-index: 10; pointer-events: auto;"></i>
                 </div>
 
-                <div class="form-actions">
-                    <label class="checkbox-container">
+                <div class="form-actions" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; font-size: 0.85rem;">
+                    <label class="checkbox-container" style="display: flex; align-items: center; color: var(--muted); cursor: pointer; gap: 8px;">
                         <input type="checkbox">
                         <span class="checkmark"></span>
                         Recordar sesión
                     </label>
-                    <a href="recuperar.html" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                    <a href="recuperar.html" style="color: #facc15; text-decoration: none;">¿Olvidaste tu contraseña?</a>
                 </div>
 
-                <button type="submit" class="btn-login">Iniciar Sesión</button>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer;">Ingresar</button>
             </form>
 
-            <div class="signup-link">
-                ¿No tienes una cuenta? <a href="registro.html">Regístrate aquí</a>
+            <div style="margin-top: 25px; color: var(--muted); font-size: 0.9rem;">
+                ¿No tienes una cuenta? <a href="registro.html" style="color: #facc15; text-decoration: none; font-weight: 600;">Regístrate aquí</a>
             </div>
             
         </div>
     </div>
+
+    <script src="js/auth.js"></script>
 </body>
 </html>
