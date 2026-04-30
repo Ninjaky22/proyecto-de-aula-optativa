@@ -17,7 +17,7 @@ function togglePassword(inputId, iconId) {
 }
 
 // ==========================================
-// LÓGICA DE REGISTRO
+// LÓGICA DE REGISTRO CON SWEETALERT2
 // ==========================================
 async function registrarUsuario(event) {
     event.preventDefault(); 
@@ -28,7 +28,14 @@ async function registrarUsuario(event) {
     const confirmPassword = document.getElementById('reg-confirm').value;
 
     if (password !== confirmPassword) {
-        alert("Las contraseñas no coinciden. Inténtalo de nuevo.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Las contraseñas no coinciden. Inténtalo de nuevo.',
+            confirmButtonColor: '#facc15',
+            background: '#111',
+            color: '#fff'
+        });
         return;
     }
 
@@ -48,14 +55,36 @@ async function registrarUsuario(event) {
         const textoRespuesta = await respuesta.text();
 
         if (textoRespuesta === "Registro exitoso") {
-            alert("¡Cuenta creada con éxito! Ahora inicia sesión.");
-            window.location.href = "login.html"; 
+            Swal.fire({
+                icon: 'success',
+                title: '¡Cuenta creada!',
+                text: 'Tu registro ha sido exitoso. Ahora inicia sesión.',
+                confirmButtonColor: '#4ade80',
+                background: '#111',
+                color: '#fff'
+            }).then(() => {
+                window.location.href = "login.html"; 
+            });
         } else {
-            alert(textoRespuesta); 
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: textoRespuesta,
+                confirmButtonColor: '#facc15',
+                background: '#111',
+                color: '#fff'
+            }); 
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("Error al conectar con el servidor Java.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Error de conexión',
+            text: 'No se pudo conectar con el servidor Java.',
+            confirmButtonColor: '#ef4444',
+            background: '#111',
+            color: '#fff'
+        });
     }
 }
 
@@ -86,7 +115,6 @@ async function iniciarSesion(event) {
         if (textoRespuesta) {
             const usuarioLogueado = JSON.parse(textoRespuesta);
             
-            // Guardamos la sesión en sessionStorage (se destruye al cerrar la pestaña)
             sessionStorage.setItem('usuarioActivo', JSON.stringify(usuarioLogueado));
             
             mensajeBox.style.display = 'block';
@@ -95,7 +123,6 @@ async function iniciarSesion(event) {
             mensajeBox.style.border = '1px solid #4ade80';
             mensajeBox.innerText = "¡Bienvenido, " + usuarioLogueado.nombreCompleto + "!";
             
-            // Redirigimos validando el rol de superUser
             setTimeout(() => {
                 if (usuarioLogueado.superUser === true) {
                     window.location.href = "dashboard.html"; 

@@ -2,15 +2,14 @@
 // CONFIGURACIÓN Y CARGA DEL CATÁLOGO
 // ==========================================
 
-// 1. Creamos una "memoria" para guardar los datos sin tener que volver a llamar a Java
 let todosLosActivos = []; 
 
 async function cargarCatalogo() {
     try {
         const respuesta = await fetch('http://localhost:8080/api/activos');
-        todosLosActivos = await respuesta.json(); // Guardamos los datos en nuestra memoria
+        todosLosActivos = await respuesta.json(); 
         
-        renderizarCatalogo(todosLosActivos); // Dibujamos todos por primera vez
+        renderizarCatalogo(todosLosActivos); 
     } catch (error) {
         console.error("Error al cargar los activos:", error);
         const contenedor = document.getElementById('catalogo');
@@ -20,18 +19,15 @@ async function cargarCatalogo() {
     }
 }
 
-// 2. Función dedicada SOLO a dibujar las tarjetas
 function renderizarCatalogo(listaActivos) {
     const contenedor = document.getElementById('catalogo');
     contenedor.innerHTML = ''; 
 
-    // Si la lista está vacía (ej. filtramos "Boxeo" y no hay nada), mostramos un mensaje
     if (listaActivos.length === 0) {
         contenedor.innerHTML = '<p style="color: var(--muted); text-align: center; grid-column: 1 / -1; margin-top: 20px;">No hay artículos disponibles en esta categoría.</p>';
         return;
     }
 
-    // Dibujamos las tarjetas
     listaActivos.forEach(activo => {
         let rutaImagen = activo.imagenUrl ? activo.imagenUrl : 'https://via.placeholder.com/150/111111/58FF0A?text=Sin+Imagen';
 
@@ -54,36 +50,35 @@ function renderizarCatalogo(listaActivos) {
     });
 }
 
-// 3. Función que se activa al hacer clic en los botones de filtro
 function filtrarCatalogo(categoria, botonClickeado) {
-    // A) Le quitamos la clase "active" a todos los botones
     const botones = document.querySelectorAll('.filter-btn');
     botones.forEach(btn => btn.classList.remove('active'));
     
-    // B) Le ponemos la clase "active" solo al botón que presionamos (para que se pinte)
     botonClickeado.classList.add('active');
 
-    // C) Filtramos la lista de la memoria
     if (categoria === 'Todos') {
-        renderizarCatalogo(todosLosActivos); // Mostrar todo
+        renderizarCatalogo(todosLosActivos); 
     } else {
-        // Filtrar solo los que coincidan con la categoría (ignorando mayúsculas/minúsculas)
         const filtrados = todosLosActivos.filter(activo => 
             activo.categoria && activo.categoria.toLowerCase() === categoria.toLowerCase()
         );
-        renderizarCatalogo(filtrados); // Dibujar solo los filtrados
+        renderizarCatalogo(filtrados); 
     }
 }
 
 // ==========================================
-// LÓGICA DEL MODAL DE RENTA
+// LÓGICA DEL MODAL DE RENTA Y CARRITO
 // ==========================================
 
 const modal = document.getElementById('rentModal');
 const daysInput = document.getElementById('rentDays');
 const modalTitle = document.getElementById('modalTitle');
 
+let articuloSeleccionado = null;
+
 function openRentModal(itemName) {
+    articuloSeleccionado = todosLosActivos.find(activo => activo.nombre === itemName);
+    
     modalTitle.innerText = itemName;
     daysInput.value = 1;
     modal.style.display = 'flex';
@@ -91,6 +86,7 @@ function openRentModal(itemName) {
 
 function closeRentModal() {
     modal.style.display = 'none';
+    articuloSeleccionado = null;
 }
 
 function changeDays(amt) {
@@ -101,16 +97,42 @@ function changeDays(amt) {
 }
 
 function addToCart() {
-    alert(`Añadido al carrito por ${daysInput.value} día(s).`);
+    if (!articuloSeleccionado) return;
+
+    const dias = parseInt(daysInput.value);
+    const total = articuloSeleccionado.precioDia * dias;
+
+    const itemCarrito = {
+        articuloNombre: articuloSeleccionado.nombre,
+        imagenUrl: articuloSeleccionado.imagenUrl,
+        precioDia: articuloSeleccionado.precioDia,
+        dias: dias,
+        totalPagado: total
+    };
+
+    let carrito = JSON.parse(sessionStorage.getItem('carritoSportTicket')) || [];
+    carrito.push(itemCarrito);
+    sessionStorage.setItem('carritoSportTicket', JSON.stringify(carrito));
+
+    // ALERTA FLOTANTE CON SWEETALERT2
+    Swal.fire({
+        icon: 'success',
+        title: '¡Añadido al carrito!',
+        text: `${articuloSeleccionado.nombre} por ${dias} día(s).`,
+        showConfirmButton: false,
+        timer: 1500, // Se cierra solo en 1.5 segundos
+        background: '#111',
+        color: '#fff',
+        iconColor: '#4ade80'
+    });
+
     closeRentModal();
 }
 
-// Cerrar al hacer clic fuera del contenido
 window.onclick = function(event) {
     if (event.target == modal) {
         closeRentModal();
     }
 }
 
-// Iniciar la carga al abrir la página
 document.addEventListener('DOMContentLoaded', cargarCatalogo);
