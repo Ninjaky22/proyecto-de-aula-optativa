@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="js/guardian.js"></script>
+    <script src="js/guardian.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
 </head>
 <body>
     <div class="dashboard-layout">
@@ -27,7 +28,7 @@
                 <a href="perfil-admin.html" class="nav-item"><i class="fa-solid fa-user"></i> Mi Perfil</a>
             </nav>
             <div class="sidebar-footer">
-                <a href="#" onclick="cerrarSesion()" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+                <a href="#" onclick="cerrarSesion()" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
             </div>
         </aside>
 
@@ -40,8 +41,8 @@
                 </div>
                 <div class="header-actions">
                     <a href="perfil-admin.html" class="user-profile-btn">
-                        <div class="avatar-circle">AD</div>
-                        <span class="user-name">Admin</span>
+                        <div class="avatar-circle" id="admin-initials">AD</div>
+                        <span class="user-name" id="admin-name">Cargando...</span>
                     </a>
                 </div>
             </header>
@@ -55,19 +56,19 @@
                             <i class="fa-solid fa-box icon-primary icon-md"></i>
                         </div>
                         <div class="metric-body">
-                            <div class="metric-value text-primary">156</div>
-                            <span class="badge badge-outline-primary">+12%</span>
+                            <div class="metric-value text-primary" id="dash-total-activos">0</div>
+                            <span class="badge badge-outline-primary">Catálogo</span>
                         </div>
                     </div>
                     
                     <div class="card metric-card">
                         <div class="metric-header">
-                            <h3 class="metric-title">Tickets Abiertos</h3>
+                            <h3 class="metric-title">Rentas / Préstamos</h3>
                             <i class="fa-solid fa-ticket icon-warning icon-md"></i>
                         </div>
                         <div class="metric-body">
-                            <div class="metric-value text-warning">23</div>
-                            <span class="badge badge-outline-warning">-5%</span>
+                            <div class="metric-value text-warning" id="dash-total-rentas">0</div>
+                            <span class="badge badge-outline-warning">Totales</span>
                         </div>
                     </div>
                     
@@ -77,8 +78,8 @@
                             <i class="fa-solid fa-triangle-exclamation icon-danger icon-md"></i>
                         </div>
                         <div class="metric-body">
-                            <div class="metric-value text-danger">5</div>
-                            <span class="badge badge-outline-danger">+2</span>
+                            <div class="metric-value text-danger" id="dash-tickets-urgentes">0</div>
+                            <span class="badge badge-outline-danger">Atención</span>
                         </div>
                     </div>
                     
@@ -88,8 +89,8 @@
                             <i class="fa-solid fa-circle-check icon-success icon-md"></i>
                         </div>
                         <div class="metric-body">
-                            <div class="metric-value text-success">8</div>
-                            <span class="badge badge-outline-success">+3</span>
+                            <div class="metric-value text-success">0</div>
+                            <span class="badge badge-outline-success">Al día</span>
                         </div>
                     </div>
                 </div>
@@ -99,62 +100,13 @@
                     <div class="card list-card">
                         <div class="list-header">
                             <h2 class="list-title">
-                                <i class="fa-solid fa-ticket icon-primary"></i> Tickets Recientes
+                                <i class="fa-solid fa-ticket icon-primary"></i> Rentas Recientes
                             </h2>
-                            <span class="badge badge-solid-primary">4 activos</span>
+                            <span class="badge badge-solid-primary" id="badge-rentas-recientes">0 activos</span>
                         </div>
                         
-                        <div class="list-body">
-                            <div class="list-item border-hover-primary">
-                                <div class="item-header">
-                                    <div>
-                                        <div class="item-meta">
-                                            <span class="item-id">T-001</span>
-                                            <span class="badge badge-outline-danger">Alta</span>
-                                        </div>
-                                        <h4 class="item-title">Balón desinflado</h4>
-                                        <p class="item-subtitle">Balón de Fútbol #12</p>
-                                    </div>
-                                    <span class="badge badge-soft-warning">Abierto</span>
-                                </div>
-                                <div class="item-footer">
-                                    <i class="fa-regular fa-clock"></i> Hace 15 min
-                                </div>
-                            </div>
-
-                            <div class="list-item border-hover-primary">
-                                <div class="item-header">
-                                    <div>
-                                        <div class="item-meta">
-                                            <span class="item-id">T-002</span>
-                                            <span class="badge badge-outline-warning">Media</span>
-                                        </div>
-                                        <h4 class="item-title">Raqueta rota</h4>
-                                        <p class="item-subtitle">Raqueta de Tenis #5</p>
-                                    </div>
-                                    <span class="badge badge-soft-info">En Proceso</span>
-                                </div>
-                                <div class="item-footer">
-                                    <i class="fa-regular fa-clock"></i> Hace 1 hora
-                                </div>
-                            </div>
-                            
-                            <div class="list-item border-hover-primary">
-                                <div class="item-header">
-                                    <div>
-                                        <div class="item-meta">
-                                            <span class="item-id">T-003</span>
-                                            <span class="badge badge-outline-info">Baja</span>
-                                        </div>
-                                        <h4 class="item-title">Red descosida</h4>
-                                        <p class="item-subtitle">Red de Voleibol #2</p>
-                                    </div>
-                                    <span class="badge badge-soft-warning">Abierto</span>
-                                </div>
-                                <div class="item-footer">
-                                    <i class="fa-regular fa-clock"></i> Hace 2 horas
-                                </div>
-                            </div>
+                        <div class="list-body" id="contenedor-rentas-recientes">
+                            <p style="color: var(--muted); padding: 15px; text-align: center;">Cargando información...</p>
                         </div>
                     </div>
 
@@ -167,6 +119,7 @@
                         </div>
                         
                         <div class="list-body">
+                            <!-- Dejaremos esto estático por ahora hasta conectar el CRUD de activos -->
                             <div class="list-item border-hover-primary">
                                 <div class="item-header">
                                     <h4 class="item-title">Balón de Fútbol</h4>
@@ -178,34 +131,6 @@
                                 </div>
                                 <div class="progress-track">
                                     <div class="progress-fill bg-danger w-13"></div>
-                                </div>
-                            </div>
-
-                            <div class="list-item border-hover-primary">
-                                <div class="item-header">
-                                    <h4 class="item-title">Raqueta de Tenis</h4>
-                                    <span class="badge badge-soft-warning">Bajo</span>
-                                </div>
-                                <div class="progress-info">
-                                    <span class="progress-label">Disponibles</span>
-                                    <span class="progress-value">3 / 8</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div class="progress-fill bg-warning w-37"></div>
-                                </div>
-                            </div>
-
-                            <div class="list-item border-hover-primary">
-                                <div class="item-header">
-                                    <h4 class="item-title">Guantes de Boxeo</h4>
-                                    <span class="badge badge-soft-success">Normal</span>
-                                </div>
-                                <div class="progress-info">
-                                    <span class="progress-label">Disponibles</span>
-                                    <span class="progress-value">9 / 12</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div class="progress-fill bg-success w-75"></div>
                                 </div>
                             </div>
                         </div>
@@ -231,10 +156,10 @@
 
                     <div class="card summary-card">
                         <div>
-                            <p class="summary-label">Préstamos</p>
-                            <p class="summary-value text-primary">42</p>
+                            <p class="summary-label">Usuarios Reg.</p>
+                            <p class="summary-value text-primary" id="dash-usuarios-total">--</p>
                         </div>
-                        <i class="fa-solid fa-box icon-info icon-xl"></i>
+                        <i class="fa-solid fa-users icon-info icon-xl"></i>
                     </div>
                 </div>
 
