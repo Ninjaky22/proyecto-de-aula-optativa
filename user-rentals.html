@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/user-rentals.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="js/guardian.js"></script>
+    <script src="js/guardian.js" defer></script>
+    <script src="js/user-rentals.js" defer></script>
 </head>
 <body style="background-color: #000;">
     <div class="dashboard-layout">
@@ -16,7 +17,7 @@
                 <div><h2 style="font-size: 1.1rem;">Sport Ticket</h2><p style="color: var(--muted); font-size: 0.8rem;">Portal de Usuario</p></div>
             </div>
             <nav class="nav-menu">
-                <a href="user-catalog.html" class="nav-item"><i class="fa-solid fa-shopping-bag"></i> Dashboard</a>
+                <a href="user-catalog.html" class="nav-item"><i class="fa-solid fa-shopping-bag"></i> Catálogo</a>
                 <a href="user-rentals.html" class="nav-item active"><i class="fa-solid fa-calendar-days"></i> Mis Rentas</a>
                 <a href="user-cart.html" class="nav-item"><i class="fa-solid fa-cart-shopping"></i> Carrito</a>
                 <a href="user-profile.html" class="nav-item"><i class="fa-solid fa-user"></i> Mi Perfil</a>
@@ -31,12 +32,25 @@
                 <h1 style="font-size: 1.6rem;">Mis Rentas Activas</h1>
             </header>
             
-            <div class="page-container" id="rentas-container">
-                <p style="color: white; text-align: center; margin-top: 20px;">Cargando tus rentas...</p>
+            <div class="page-container">
+                <div id="rentas-container">
+                    <p style="color: white; text-align: center; margin-top: 20px;">Cargando tus rentas...</p>
+                </div>
+
+                <!-- Paginación de Rentas -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid var(--border);">
+                    <div class="pagination-info" style="color: var(--muted); font-size: 0.9rem;">
+                        <span id="ren-info-mostrando">Mostrando 0 rentas</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button onclick="cambiarPaginaRentas(-1)" id="btn-prev-ren" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); padding: 5px 15px; border-radius: 6px; cursor: pointer;">Anterior</button>
+                        <span id="indicador-pagina-ren" style="color: var(--primary); font-weight: bold; font-size: 0.9rem;">Pág. 1</span>
+                        <button onclick="cambiarPaginaRentas(1)" id="btn-next-ren" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); padding: 5px 15px; border-radius: 6px; cursor: pointer;">Siguiente</button>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
-
-    <script src="js/user-rentals.js"></script>
 </body>
 </html>

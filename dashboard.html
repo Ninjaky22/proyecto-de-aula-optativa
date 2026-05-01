@@ -49,6 +49,7 @@
 
             <div class="page-container">
                 
+                <!-- MÉTRICAS PRINCIPALES -->
                 <div class="grid-4">
                     <div class="card metric-card">
                         <div class="metric-header">
@@ -63,46 +64,46 @@
                     
                     <div class="card metric-card">
                         <div class="metric-header">
-                            <h3 class="metric-title">Rentas / Préstamos</h3>
-                            <i class="fa-solid fa-ticket icon-warning icon-md"></i>
+                            <h3 class="metric-title">Tickets Pendientes</h3>
+                            <i class="fa-solid fa-clock icon-warning icon-md"></i>
                         </div>
                         <div class="metric-body">
-                            <div class="metric-value text-warning" id="dash-total-rentas">0</div>
-                            <span class="badge badge-outline-warning">Totales</span>
+                            <div class="metric-value text-warning" id="dash-tickets-pendientes">0</div>
+                            <span class="badge badge-outline-warning">Por revisar</span>
                         </div>
                     </div>
                     
                     <div class="card metric-card">
                         <div class="metric-header">
-                            <h3 class="metric-title">Tickets Urgentes</h3>
-                            <i class="fa-solid fa-triangle-exclamation icon-danger icon-md"></i>
+                            <h3 class="metric-title">Tickets Denegados</h3>
+                            <i class="fa-solid fa-ban icon-danger icon-md"></i>
                         </div>
                         <div class="metric-body">
-                            <div class="metric-value text-danger" id="dash-tickets-urgentes">0</div>
-                            <span class="badge badge-outline-danger">Atención</span>
+                            <div class="metric-value text-danger" id="dash-tickets-denegados">0</div>
+                            <span class="badge badge-outline-danger">Rechazados</span>
                         </div>
                     </div>
                     
                     <div class="card metric-card">
                         <div class="metric-header">
-                            <h3 class="metric-title">Resueltos Hoy</h3>
-                            <i class="fa-solid fa-circle-check icon-success icon-md"></i>
+                            <h3 class="metric-title">Tickets Resueltos</h3>
+                            <i class="fa-solid fa-check-double icon-success icon-md"></i>
                         </div>
                         <div class="metric-body">
-                            <div class="metric-value text-success">0</div>
-                            <span class="badge badge-outline-success">Al día</span>
+                            <div class="metric-value text-success" id="dash-tickets-resueltos">0</div>
+                            <span class="badge badge-outline-success">Aceptados / Devueltos</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- LISTAS SECUNDARIAS -->
                 <div class="grid-2">
-                    
                     <div class="card list-card">
                         <div class="list-header">
                             <h2 class="list-title">
                                 <i class="fa-solid fa-ticket icon-primary"></i> Rentas Recientes
                             </h2>
-                            <span class="badge badge-solid-primary" id="badge-rentas-recientes">0 activos</span>
+                            <span class="badge badge-solid-primary" id="badge-rentas-recientes">0 totales</span>
                         </div>
                         
                         <div class="list-body" id="contenedor-rentas-recientes">
@@ -118,46 +119,34 @@
                             <span class="badge badge-outline-warning">Requiere atención</span>
                         </div>
                         
-                        <div class="list-body">
-                            <!-- Dejaremos esto estático por ahora hasta conectar el CRUD de activos -->
-                            <div class="list-item border-hover-primary">
-                                <div class="item-header">
-                                    <h4 class="item-title">Balón de Fútbol</h4>
-                                    <span class="badge badge-soft-danger">Crítico</span>
-                                </div>
-                                <div class="progress-info">
-                                    <span class="progress-label">Disponibles</span>
-                                    <span class="progress-value">2 / 15</span>
-                                </div>
-                                <div class="progress-track">
-                                    <div class="progress-fill bg-danger w-13"></div>
-                                </div>
-                            </div>
+                        <div class="list-body" id="contenedor-activos-criticos">
+                            <p style="color: var(--muted); padding: 15px; text-align: center;">Calculando inventario...</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- MÉTRICAS FINANCIERAS Y USUARIOS -->
                 <div class="grid-3">
                     <div class="card summary-card">
                         <div>
-                            <p class="summary-label">Tiempo promedio</p>
-                            <p class="summary-value text-primary">2.5 hrs</p>
+                            <p class="summary-label">Ganancias Semanales</p>
+                            <p class="summary-value text-success" id="dash-ganancias-semanales">$0</p>
                         </div>
-                        <i class="fa-solid fa-arrow-trend-up icon-success icon-xl"></i>
+                        <i class="fa-solid fa-money-bill-trend-up icon-success icon-xl"></i>
                     </div>
 
                     <div class="card summary-card">
                         <div>
-                            <p class="summary-label">Tasa resolución</p>
-                            <p class="summary-value text-primary">94.5%</p>
+                            <p class="summary-label">Ganancias Historicas</p>
+                            <p class="summary-value text-primary" id="dash-ganancias-totales">$0</p>
                         </div>
-                        <i class="fa-solid fa-circle-check icon-success icon-xl"></i>
+                        <i class="fa-solid fa-sack-dollar icon-primary icon-xl"></i>
                     </div>
 
                     <div class="card summary-card">
                         <div>
-                            <p class="summary-label">Usuarios Reg.</p>
-                            <p class="summary-value text-primary" id="dash-usuarios-total">--</p>
+                            <p class="summary-label">Usuarios Registrados</p>
+                            <p class="summary-value text-info" id="dash-usuarios-reg">0</p>
                         </div>
                         <i class="fa-solid fa-users icon-info icon-xl"></i>
                     </div>

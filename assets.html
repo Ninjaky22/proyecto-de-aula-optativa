@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="css/assets.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- LIBRERÍA SWEETALERT2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <!-- SCRIPTS DE SEGURIDAD Y LÓGICA -->
     <script src="js/guardian.js" defer></script>
     <script src="js/assets.js" defer></script>
@@ -67,29 +70,37 @@
                                     <th style="padding: 15px;">NOMBRE</th>
                                     <th style="padding: 15px;">CATEGORÍA</th>
                                     <th style="padding: 15px;">PRECIO / DÍA</th>
+                                    <th style="padding: 15px;">CANT.</th>
                                     <th style="padding: 15px; text-align: right;">ACCIONES</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla-activos">
-                                <!-- JavaScript inyectará las filas aquí -->
                                 <tr>
-                                    <td colspan="6" style="text-align: center; padding: 30px; color: var(--muted);">Cargando inventario...</td>
+                                    <td colspan="7" style="text-align: center; padding: 30px; color: var(--muted);">Cargando inventario...</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 
-                <div class="pagination-info" style="margin-top: 15px; color: var(--muted); display: flex; justify-content: space-between; font-size: 0.9rem;">
-                    <p id="info-mostrando">Mostrando 0 activos</p>
-                    <p id="info-total">Total catálogo: 0</p>
+                <!-- PAGINACIÓN Y RESUMEN -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                    <div class="pagination-info" style="color: var(--muted); font-size: 0.9rem;">
+                        <span id="info-mostrando">Mostrando 0 activos</span> | <span id="info-total">Total catálogo: 0</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button onclick="cambiarPaginaActivos(-1)" id="btn-prev-act" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); padding: 5px 15px; border-radius: 6px; cursor: pointer;">Anterior</button>
+                        <span id="indicador-pagina-act" style="color: var(--primary); font-weight: bold; font-size: 0.9rem;">Pág. 1</span>
+                        <button onclick="cambiarPaginaActivos(1)" id="btn-next-act" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); padding: 5px 15px; border-radius: 6px; cursor: pointer;">Siguiente</button>
+                    </div>
                 </div>
                 
             </div>
         </main>
     </div>
 
-    <!-- MODAL CRUD DE ACTIVO (Nativo, sin SweetAlert) -->
+    <!-- MODAL CRUD DE ACTIVO -->
     <div id="modalActivo" class="custom-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center;">
         <div class="modal-content card" style="width: 100%; max-width: 450px; padding: 35px; border: 1px solid var(--border); border-radius: 12px; background: #0a0a0a;">
             <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
@@ -98,7 +109,7 @@
             </div>
             
             <div class="modal-body" style="display: flex; flex-direction: column; gap: 15px;">
-                <input type="hidden" id="activo-id"> <!-- ID Oculto para cuando editemos -->
+                <input type="hidden" id="activo-id"> 
 
                 <!-- PREVISUALIZACIÓN DE IMAGEN -->
                 <div style="text-align: center; margin-bottom: 10px;">
@@ -132,10 +143,14 @@
                     <input type="number" id="activo-precio" style="background: #000; border: 1px solid var(--border); padding: 10px; color: #fff; border-radius: 6px; outline: none;" placeholder="Ej: 5000">
                 </div>
 
+                <div class="input-group" style="display: flex; flex-direction: column; gap: 5px;">
+                    <label style="font-size: 0.75rem; color: var(--muted); text-transform: uppercase;">Cantidad en Stock</label>
+                    <input type="number" id="activo-cantidad" style="background: #000; border: 1px solid var(--border); padding: 10px; color: #fff; border-radius: 6px; outline: none;" placeholder="Ej: 15">
+                </div>
+
                 <button onclick="guardarActivo()" style="width: 100%; background: var(--primary); color: #000; font-weight: bold; padding: 12px; border: none; border-radius: 6px; cursor: pointer; margin-top: 10px; text-transform: uppercase;">Guardar Activo</button>
             </div>
         </div>
     </div>
-
 </body>
 </html>

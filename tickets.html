@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/tickets.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- LIBRERÍA SWEETALERT2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="js/guardian.js" defer></script>
+    <script src="js/tickets.js" defer></script>
 </head>
 <body>
     <div class="dashboard-layout">
@@ -26,7 +32,7 @@
                 <a href="perfil-admin.html" class="nav-item"><i class="fa-solid fa-user"></i> Mi Perfil</a>
             </nav>
             <div class="sidebar-footer">
-                <a href="login.html" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a>
+                <a href="#" onclick="cerrarSesion()" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
             </div>
         </aside>
 
@@ -34,147 +40,110 @@
             <header class="header">
                 <div class="header-titles">
                     <h1>Gestión de Tickets</h1>
-                    <p>Administra, filtra y actualiza el estado de las solicitudes</p>
+                    <p>Aprueba o deniega las solicitudes de préstamo de inventario</p>
                 </div>
             </header>
 
             <div class="page-container">
                 
                 <div class="filter-tabs">
-                    <button class="tab-btn active" onclick="filterTickets('all', this)">Todos</button>
-                    <button class="tab-btn" onclick="filterTickets('renta', this)">Rentas</button>
-                    <button class="tab-btn" onclick="filterTickets('mantenimiento', this)">Mantenimiento</button>
+                    <button class="tab-btn active" onclick="filtrarTickets('Pendientes', this)">Pendientes</button>
+                    <button class="tab-btn" onclick="filtrarTickets('Resueltos', this)">Resueltos (Historial)</button>
                 </div>
 
                 <div class="card table-card">
                     <div class="table-responsive">
-                        <table class="data-table">
+                        <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>TIPO</th>
-                                    <th>ARTÍCULO</th>
-                                    <th>ESTADO</th>
-                                    <th class="text-right">GESTIÓN</th>
+                                <tr style="border-bottom: 1px solid var(--border); color: var(--muted); font-size: 0.85rem;">
+                                    <th style="padding: 15px;">TICKET ID</th>
+                                    <th style="padding: 15px;">USUARIO (EMAIL)</th>
+                                    <th style="padding: 15px;">ARTÍCULO</th>
+                                    <th style="padding: 15px;">ESTADO</th>
+                                    <th style="padding: 15px; text-align: right;">GESTIÓN</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="ticket-row" data-type="renta">
-                                    <td class="id-text">#TK-1001</td>
-                                    <td><span class="badge badge-outline-primary">Renta</span></td>
-                                    <td class="item-name">Balón de Fútbol Nike</td>
-                                    <td id="status-TK-1001" class="status-text">Pendiente</td>
-                                    <td class="text-right">
-                                        <button onclick="openModal('#TK-1001', 'Balón de Fútbol Nike', 'renta', 'Carlos Ramirez')" class="btn-detail">
-                                            Ver detalles
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                                <tr class="ticket-row" data-type="mantenimiento">
-                                    <td class="id-text">#TK-1002</td>
-                                    <td><span class="badge badge-outline-info">Mantenimiento</span></td>
-                                    <td class="item-name">Mesa Ping Pong #2</td>
-                                    <td id="status-TK-1002" class="status-text">Pendiente</td>
-                                    <td class="text-right">
-                                        <button onclick="openModal('#TK-1002', 'Mesa Ping Pong #2', 'mantenimiento', 'Staff IT')" class="btn-detail">
-                                            Ver detalles
-                                        </button>
-                                    </td>
+                            <tbody id="tabla-tickets">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 30px; color: var(--muted);">Cargando solicitudes...</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
+                <!-- PAGINACIÓN Y RESUMEN -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                    <div class="pagination-info" style="color: var(--muted); font-size: 0.9rem;">
+                        <span id="t-info-mostrando">Mostrando 0 tickets</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button onclick="cambiarPaginaTickets(-1)" id="btn-prev-tk" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); padding: 5px 15px; border-radius: 6px; cursor: pointer;">Anterior</button>
+                        <span id="indicador-pagina-tk" style="color: var(--primary); font-weight: bold; font-size: 0.9rem;">Pág. 1</span>
+                        <button onclick="cambiarPaginaTickets(1)" id="btn-next-tk" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); padding: 5px 15px; border-radius: 6px; cursor: pointer;">Siguiente</button>
+                    </div>
+                </div>
+
             </div>
         </main>
     </div>
 
-    <div id="ticketModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="m-id">Ticket #</h2>
-                <p>Actualiza el estado de la solicitud.</p>
-            </div>
-            <div class="modal-body">
-                <div class="info-row">
-                    <span>Artículo:</span> 
-                    <span id="m-item" class="info-value"></span>
+    <!-- MODAL DETALLADO ACTUALIZADO -->
+    <div id="ticketModal" class="custom-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center;">
+        <div class="modal-content card" style="width: 100%; max-width: 500px; padding: 35px; border: 1px solid var(--border); border-radius: 12px; background: #0a0a0a;">
+            
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <div>
+                    <h2 id="m-id" style="color: #fff; margin: 0;">Ticket #</h2>
+                    <p style="color: var(--muted); font-size: 0.9rem; margin-top: 5px;">Detalles de la solicitud de préstamo.</p>
                 </div>
-                <div class="info-row">
-                    <span>Solicitante:</span> 
-                    <span id="m-user" class="info-value"></span>
+                <button onclick="cerrarModal()" style="background: none; border: none; color: var(--muted); font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+            
+            <div class="modal-body" style="display: flex; flex-direction: column; gap: 15px; background: #111; padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+                    <span style="color: var(--muted); font-size: 0.85rem;">ARTÍCULO SOLICITADO</span> 
+                    <strong id="m-item" style="color: var(--primary);"></strong>
+                </div>
+
+                <!-- NUEVOS CAMPOS DE FECHA -->
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+                    <span style="color: var(--muted); font-size: 0.85rem;">FECHA DE PRÉSTAMO</span> 
+                    <strong id="m-fecha-prestamo" style="color: #fff;"></strong>
                 </div>
                 
-                <div class="status-selector">
-                    <label>Estado Actual</label>
-                    <select id="m-select-status" class="select-custom">
-                        </select>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+                    <span style="color: var(--muted); font-size: 0.85rem;">FECHA DE DEVOLUCIÓN</span> 
+                    <strong id="m-fecha-devolucion" style="color: #facc15;"></strong>
                 </div>
+
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+                    <span style="color: var(--muted); font-size: 0.85rem;">TIEMPO TOTAL</span> 
+                    <strong id="m-dias" style="color: #fff;"></strong>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">
+                    <span style="color: var(--muted); font-size: 0.85rem;">DATOS DEL SOLICITANTE</span> 
+                    <div style="display: flex; flex-direction: column; color: #fff; font-size: 0.95rem; background: #000; padding: 10px; border-radius: 6px;">
+                        <span id="m-user-email"><i class="fa-solid fa-envelope" style="width: 20px; color: var(--muted);"></i> Cargando...</span>
+                        <span id="m-user-name"><i class="fa-solid fa-user" style="width: 20px; color: var(--muted);"></i> Cargando...</span>
+                        <span id="m-user-phone"><i class="fa-solid fa-phone" style="width: 20px; color: var(--muted);"></i> Cargando...</span>
+                    </div>
+                </div>
+
             </div>
-            <div class="modal-footer">
-                <button onclick="closeModal()" class="btn-cancel">Cancelar</button>
-                <button onclick="saveStatus()" class="btn-save">Guardar Cambios</button>
+            
+            <div id="modal-actions" style="display: flex; gap: 15px; margin-top: 25px;">
+                <button onclick="guardarEstadoTicket('Denegado')" style="flex: 1; background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid #ef4444; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;">
+                    <i class="fa-solid fa-xmark"></i> Denegar
+                </button>
+                <button onclick="guardarEstadoTicket('Aceptado')" style="flex: 1; background: var(--primary); color: #000; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;">
+                    <i class="fa-solid fa-check"></i> Aceptar
+                </button>
             </div>
         </div>
     </div>
-
-    <script>
-        let currentTicketId = '';
-
-        function filterTickets(type, btn) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.ticket-row').forEach(row => {
-                row.style.display = (type === 'all' || row.getAttribute('data-type') === type) ? 'table-row' : 'none';
-            });
-        }
-
-        function openModal(id, item, type, user) {
-            currentTicketId = id;
-            document.getElementById('m-id').innerText = "Ticket " + id;
-            document.getElementById('m-item').innerText = item;
-            document.getElementById('m-user').innerText = user;
-
-            const select = document.getElementById('m-select-status');
-            select.innerHTML = ''; 
-
-            if (type === 'renta') {
-                select.innerHTML = `
-                    <option value="Pendiente por aprobación">Pendiente por aprobación</option>
-                    <option value="Aprobado">Aprobado</option>
-                    <option value="Denegado">Denegado</option>
-                `;
-            } else {
-                select.innerHTML = `
-                    <option value="Pendiente">Pendiente</option>
-                    <option value="Gestionado">Gestionado</option>
-                `;
-            }
-
-            document.getElementById('ticketModal').style.display = 'flex';
-        }
-
-        function saveStatus() {
-            const newStatus = document.getElementById('m-select-status').value;
-            const statusCellId = 'status-' + currentTicketId.replace('#', '');
-            document.getElementById(statusCellId).innerText = newStatus;
-            
-            // Opcional: Agregar una pequeña animación de éxito o cambio de color aquí
-            document.getElementById(statusCellId).style.color = 'var(--primary)';
-            
-            closeModal();
-        }
-
-        function closeModal() { 
-            document.getElementById('ticketModal').style.display = 'none'; 
-        }
-
-        // Cerrar modal al hacer clic fuera de la tarjeta
-        window.onclick = function(event) {
-            const modal = document.getElementById('ticketModal');
-            if (event.target == modal) closeModal();
-        }
-    </script>
 </body>
 </html>

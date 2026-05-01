@@ -6,9 +6,69 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/user-catalog.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- LIBRERÍAS EXTERNAS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- FLATPICKR (Para el calendario visual elegante) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+
+    <script src="js/guardian.js" defer></script>
     <script src="js/user-catalog.js" defer></script>
-    <script src="js/guardian.js"></script>
+
+    <style>
+        /* Estilos personalizados para Flatpickr integrados con el tema */
+        .flatpickr-calendar {
+            background: #111;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+        }
+        .flatpickr-day.selected, 
+        .flatpickr-day.startRange, 
+        .flatpickr-day.endRange, 
+        .flatpickr-day.selected.inRange, 
+        .flatpickr-day.startRange.inRange, 
+        .flatpickr-day.endRange.inRange, 
+        .flatpickr-day.selected:focus, 
+        .flatpickr-day.startRange:focus, 
+        .flatpickr-day.endRange:focus, 
+        .flatpickr-day.selected:hover, 
+        .flatpickr-day.startRange:hover, 
+        .flatpickr-day.endRange:hover, 
+        .flatpickr-day.selected.prevMonthDay, 
+        .flatpickr-day.startRange.prevMonthDay, 
+        .flatpickr-day.endRange.prevMonthDay, 
+        .flatpickr-day.selected.nextMonthDay, 
+        .flatpickr-day.startRange.nextMonthDay, 
+        .flatpickr-day.endRange.nextMonthDay {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+            font-weight: bold;
+        }
+        .flatpickr-day:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .flatpickr-months .flatpickr-month {
+            background: #0a0a0a;
+            color: #fff;
+        }
+        .flatpickr-current-month .flatpickr-monthDropdown-months {
+            background: #0a0a0a;
+        }
+        .flatpickr-weekdays {
+            background: #0a0a0a;
+        }
+        span.flatpickr-weekday {
+            color: var(--muted);
+        }
+        .flatpickr-day {
+            color: #e5e7eb;
+        }
+    </style>
 </head>
 <body style="background-color: #000;">
     <div class="dashboard-layout">
@@ -21,13 +81,13 @@
                 </div>
             </div>
             <nav class="nav-menu">
-                <a href="user-catalog.html" class="nav-item active"><i class="fa-solid fa-shopping-bag"></i> Dashboard</a>
+                <a href="user-catalog.html" class="nav-item active"><i class="fa-solid fa-shopping-bag"></i> Catálogo</a>
                 <a href="user-rentals.html" class="nav-item"><i class="fa-solid fa-calendar-days"></i> Mis Rentas</a>
                 <a href="user-cart.html" class="nav-item"><i class="fa-solid fa-cart-shopping"></i> Carrito</a>
                 <a href="user-profile.html" class="nav-item"><i class="fa-solid fa-user"></i> Mi Perfil</a>
             </nav>
             <div class="sidebar-footer">
-                <a href="login.html" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+                <a href="#" onclick="cerrarSesion()" class="nav-item logout"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
             </div>
         </aside>
 
@@ -40,34 +100,71 @@
             </header>
 
             <div class="page-container">
-                <div class="catalog-filters" style="display: flex; gap: 10px; margin-bottom: 30px;">
+                <div class="catalog-filters" style="display: flex; gap: 10px; margin-bottom: 30px; overflow-x: auto; padding-bottom: 5px;">
                     <button class="filter-btn active" onclick="filtrarCatalogo('Todos', this)">Todos</button>
                     <button class="filter-btn" onclick="filtrarCatalogo('Fútbol', this)">Fútbol</button>
+                    <button class="filter-btn" onclick="filtrarCatalogo('Baloncesto', this)">Baloncesto</button>
                     <button class="filter-btn" onclick="filtrarCatalogo('Tenis', this)">Tenis</button>
                     <button class="filter-btn" onclick="filtrarCatalogo('Voleibol', this)">Voleibol</button>
-                    <button class="filter-btn" onclick="filtrarCatalogo('Boxeo', this)">Boxeo</button>
+                    <button class="filter-btn" onclick="filtrarCatalogo('Gimnasio', this)">Gimnasio</button>
+                    <button class="filter-btn" onclick="filtrarCatalogo('Otros', this)">Otros</button>
                 </div>
                 
                 <div class="catalog-grid" id="catalogo">
+                    <!-- Javascript inyectará los productos aquí -->
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid var(--border);">
+                    <div class="pagination-info" style="color: var(--muted); font-size: 0.9rem;">
+                        <span id="cat-info-mostrando">Mostrando 0 productos</span>
                     </div>
+                    
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button onclick="cambiarPaginaCatalogo(-1)" id="btn-prev-cat" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); padding: 5px 15px; border-radius: 6px; cursor: pointer;">Anterior</button>
+                        <span id="indicador-pagina-cat" style="color: var(--primary); font-weight: bold; font-size: 0.9rem;">Pág. 1</span>
+                        <button onclick="cambiarPaginaCatalogo(1)" id="btn-next-cat" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); padding: 5px 15px; border-radius: 6px; cursor: pointer;">Siguiente</button>
+                    </div>
+                </div>
+
             </div>
         </main>
     </div>
 
-    <div id="rentModal" class="modal-renta">
-        <div class="modal-content">
-            <h2 id="modalTitle" style="color: var(--primary); margin-bottom: 10px;">Configurar Renta</h2>
-            <p style="color: var(--muted); font-size: 0.9rem;">¿Cuántos días deseas rentar este artículo?</p>
+    <!-- MODAL DE CONFIGURACIÓN DE RENTA (Mejorado Visualmente) -->
+    <div id="rentModal" class="modal-renta" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center;">
+        <div class="modal-content" style="background: #0a0a0a; border: 1px solid var(--primary); width: 100%; max-width: 400px; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative;">
             
-            <div class="days-selector">
-                <button onclick="changeDays(-1)" class="btn-outline" style="padding: 5px 15px;"><i class="fa-solid fa-minus"></i></button>
-                <input type="number" id="rentDays" class="qty-input" value="1" min="1">
-                <button onclick="changeDays(1)" class="btn-outline" style="padding: 5px 15px;"><i class="fa-solid fa-plus"></i></button>
+            <!-- Botón Cerrar (Esquina) -->
+            <button onclick="closeRentModal()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.5rem; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--muted)'">&times;</button>
+            
+            <!-- Título Centrado -->
+            <div style="text-align: center; margin-bottom: 25px;">
+                <h2 id="modalTitle" style="color: #fff; margin: 0; font-size: 1.8rem;">Cargando...</h2>
+                <p style="color: var(--muted); font-size: 0.9rem; margin-top: 5px;">Define las fechas de tu préstamo.</p>
+            </div>
+            
+            <!-- Caja de Fechas -->
+            <div style="background: #111; padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px;">
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;">
+                    <span style="color: var(--muted); font-size: 0.85rem; text-transform: uppercase;"><i class="fa-regular fa-calendar-check" style="margin-right:5px;"></i> Fecha de Inicio:</span>
+                    <strong id="modalFechaInicio" style="color: #fff; font-size: 1rem;"></strong>
+                </div>
+
+                <div style="text-align: center;">
+                    <label style="color: #facc15; font-size: 0.85rem; text-transform: uppercase; display: block; margin-bottom: 10px; font-weight: bold;"><i class="fa-regular fa-calendar-xmark" style="margin-right:5px;"></i> Fecha de Devolución:</label>
+                    <input type="text" id="rentEndDate" placeholder="dd/mm/aaaa" style="width: 100%; background: #000; border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 6px; outline: none; font-family: inherit; cursor: pointer; text-align: center; font-size: 1rem;">
+                </div>
             </div>
 
-            <div class="modal-btns">
-                <button class="btn btn-primary" onclick="addToCart()" style="width: 100%;">Añadir al carrito</button>
-                <button class="btn-remove" onclick="closeRentModal()" style="background: none; border: none; color: var(--muted); cursor: pointer; margin-top: 10px;">Cancelar</button>
+            <!-- Resumen -->
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid var(--border); margin-bottom: 20px;">
+                <span style="color: var(--muted); font-size: 1rem;">Tiempo de préstamo:</span>
+                <strong id="modalDiasCalculados" style="color: var(--primary); font-size: 1.2rem;">0 días</strong>
+            </div>
+
+            <div class="modal-btns" style="display: flex; flex-direction: column;">
+                <button class="btn btn-primary" onclick="addToCart()" id="btn-add-cart" style="width: 100%; padding: 15px; font-weight: bold; text-transform: uppercase; background: var(--primary); color: #000; border: none; border-radius: 6px; cursor: pointer; transition: 0.2s; opacity: 0.5; pointer-events: none;">Añadir al carrito</button>
             </div>
         </div>
     </div>
