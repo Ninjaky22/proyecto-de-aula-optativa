@@ -103,11 +103,15 @@ function renderizarTabla(tickets) {
             badgeColor = 'background: rgba(156, 163, 175, 0.1); color: #9ca3af; border: 1px solid rgba(156, 163, 175, 0.3);'; 
         }
 
+        // ACTUALIZACIÓN: Leemos el email del objeto usuario y el nombre del objeto activo
         tbody.innerHTML += `
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.2s;">
                 <td style="padding: 15px; font-family: monospace; color: var(--muted);">TK-${ticket.id}</td>
-                <td style="padding: 15px; color: #fff;">${ticket.usuarioEmail}</td>
-                <td style="padding: 15px; color: #fff; font-weight: 500;">${ticket.articuloNombre}</td>
+                <td style="padding: 15px; color: #fff;">
+                    <div style="font-weight: bold;">${ticket.usuario.nombreCompleto}</div>
+                    <div style="font-size: 0.8rem; color: var(--muted);">${ticket.usuario.email}</div>
+                </td>
+                <td style="padding: 15px; color: #fff; font-weight: 500;">${ticket.activo.nombre}</td>
                 <td style="padding: 15px;"><span style="padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; ${badgeColor}">${ticket.estado}</span></td>
                 <td style="padding: 15px; text-align: right;">
                     <button onclick="abrirModal(${ticket.id})" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='#000'" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='#fff'">Ver Detalle</button>
@@ -123,8 +127,9 @@ async function abrirModal(id) {
 
     ticketActualId = id;
     
+    // ACTUALIZACIÓN: Accedemos al nombre del activo
     document.getElementById('m-id').innerText = `Ticket #${ticket.id}`;
-    document.getElementById('m-item').innerText = ticket.articuloNombre;
+    document.getElementById('m-item').innerText = ticket.activo.nombre;
     document.getElementById('m-dias').innerText = `${ticket.dias} días`;
 
     // Calcular Fecha de Inicio exacta (evita bugs de zona horaria)
@@ -143,28 +148,11 @@ async function abrirModal(id) {
     document.getElementById('m-fecha-prestamo').innerText = fechaInicio.toLocaleDateString('es-ES');
     document.getElementById('m-fecha-devolucion').innerText = fechaFin.toLocaleDateString('es-ES');
 
-    // Cargar datos del usuario
-    document.getElementById('m-user-email').innerHTML = `<i class="fa-solid fa-envelope" style="width: 25px; color: var(--muted);"></i> ${ticket.usuarioEmail}`;
-    document.getElementById('m-user-name').innerHTML = `<i class="fa-solid fa-user" style="width: 25px; color: var(--muted);"></i> Buscando...`;
-    document.getElementById('m-user-phone').innerHTML = `<i class="fa-solid fa-phone" style="width: 25px; color: var(--muted);"></i> Buscando...`;
-
-    try {
-        const resUsuarios = await fetch('http://localhost:8080/api/usuarios');
-        if (resUsuarios.ok) {
-            const usuarios = await resUsuarios.json();
-            const usuarioSolicitante = usuarios.find(u => u.email === ticket.usuarioEmail);
-            
-            if (usuarioSolicitante) {
-                document.getElementById('m-user-name').innerHTML = `<i class="fa-solid fa-user" style="width: 25px; color: var(--muted);"></i> ${usuarioSolicitante.nombreCompleto}`;
-                document.getElementById('m-user-phone').innerHTML = `<i class="fa-solid fa-phone" style="width: 25px; color: var(--muted);"></i> ${usuarioSolicitante.telefono || 'No registrado'}`;
-            } else {
-                document.getElementById('m-user-name').innerHTML = `<i class="fa-solid fa-user" style="width: 25px; color: var(--muted);"></i> No encontrado`;
-                document.getElementById('m-user-phone').innerHTML = `<i class="fa-solid fa-phone" style="width: 25px; color: var(--muted);"></i> No encontrado`;
-            }
-        }
-    } catch (e) {
-        console.warn("No se pudo obtener la lista de usuarios", e);
-    }
+    // ACTUALIZACIÓN: OPTIMIZACIÓN EXTREMA. Ya no necesitamos hacer un fetch a /api/usuarios
+    // porque el backend ya nos envía los datos del usuario dentro de la renta.
+    document.getElementById('m-user-email').innerHTML = `<i class="fa-solid fa-envelope" style="width: 25px; color: var(--muted);"></i> ${ticket.usuario.email}`;
+    document.getElementById('m-user-name').innerHTML = `<i class="fa-solid fa-user" style="width: 25px; color: var(--muted);"></i> ${ticket.usuario.nombreCompleto}`;
+    document.getElementById('m-user-phone').innerHTML = `<i class="fa-solid fa-phone" style="width: 25px; color: var(--muted);"></i> ${ticket.usuario.telefono || 'No registrado'}`;
 
     const actionsDiv = document.getElementById('modal-actions');
     if (ticket.estado === 'Pendiente' || ticket.estado === 'Activo') {

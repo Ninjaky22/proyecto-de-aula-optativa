@@ -75,7 +75,9 @@ function renderizarRentas(rentas) {
     }
 
     rentas.forEach(renta => {
-        let rutaImagen = renta.imagenUrl ? renta.imagenUrl : 'https://via.placeholder.com/150/111111/58FF0A?text=Sin+Imagen';
+        // ACTUALIZACIÓN RELACIONAL: Ahora la imagen y el nombre vienen del objeto anidado 'activo'
+        let rutaImagen = (renta.activo && renta.activo.imagenUrl) ? renta.activo.imagenUrl : 'https://via.placeholder.com/150/111111/58FF0A?text=Sin+Imagen';
+        let nombreArticulo = renta.activo ? renta.activo.nombre : 'Artículo Desconocido';
         
         let colorFondo, colorTexto, iconoEstado;
         
@@ -100,11 +102,11 @@ function renderizarRentas(rentas) {
                 <div class="rental-main-info" style="display: flex; justify-content: space-between; align-items: center; padding: 25px;">
                     <div style="display: flex; gap: 20px; align-items: center;">
                         <div class="item-visual" style="width: 80px; height: 80px; border-radius: 8px; overflow: hidden; background: #111; padding: 0; display: flex; justify-content: center; align-items: center;">
-                            <img src="${rutaImagen}" alt="${renta.articuloNombre}" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="${rutaImagen}" alt="${nombreArticulo}" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         
                         <div>
-                            <h3 style="color: #fff; margin-bottom: 5px;">${renta.articuloNombre} <span style="font-size: 0.8rem; color: var(--muted); font-weight: normal;">(TK-${renta.id})</span></h3>
+                            <h3 style="color: #fff; margin-bottom: 5px;">${nombreArticulo} <span style="font-size: 0.8rem; color: var(--muted); font-weight: normal;">(TK-${renta.id})</span></h3>
                             <p style="color: var(--muted); font-size: 0.85rem;">Inicio: ${fechaGuardada} | Devolución: ${fechaFin.toLocaleDateString('es-ES')}</p>
                             <p style="color: #facc15; font-size: 0.9rem; font-weight: 600; margin-top: 5px;">
                                 <i class="fa-regular fa-calendar-check"></i> ${renta.dias} días de préstamo

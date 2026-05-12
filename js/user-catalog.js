@@ -217,9 +217,11 @@ function addToCart() {
 
     const total = articuloSeleccionado.precioDia * diasSeleccionados;
 
+    // ACTUALIZACIÓN RELACIONAL: Añadimos el activoId
     const itemCarrito = {
-        articuloNombre: articuloSeleccionado.nombre,
-        imagenUrl: articuloSeleccionado.imagenUrl,
+        activoId: articuloSeleccionado.id, 
+        articuloNombre: articuloSeleccionado.nombre, // Lo guardamos temporalmente para la vista del carrito
+        imagenUrl: articuloSeleccionado.imagenUrl,   // Lo guardamos temporalmente para la vista del carrito
         precioDia: articuloSeleccionado.precioDia,
         dias: diasSeleccionados,
         totalPagado: total
@@ -227,7 +229,8 @@ function addToCart() {
 
     let carrito = JSON.parse(sessionStorage.getItem('carritoSportTicket')) || [];
     
-    const indexExistente = carrito.findIndex(item => item.articuloNombre === articuloSeleccionado.nombre);
+    // ACTUALIZACIÓN: Ahora buscamos si ya existe por el ID del activo, no solo por el nombre
+    const indexExistente = carrito.findIndex(item => item.activoId === articuloSeleccionado.id);
     
     if (indexExistente !== -1) {
         carrito[indexExistente].dias = diasSeleccionados;

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const [resActivos, resRentas, resUsuarios] = await Promise.all([
             fetch('http://localhost:8080/api/activos'),
             fetch('http://localhost:8080/api/rentas'),
-            fetch('http://localhost:8080/api/usuarios') // Agregamos la llamada a usuarios
+            fetch('http://localhost:8080/api/usuarios') 
         ]);
 
         let activos = resActivos.ok ? await resActivos.json() : [];
@@ -54,12 +54,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         fechaHaceUnaSemana.setDate(fechaHoy.getDate() - 7);
 
         rentas.forEach(r => {
-            // Solo sumamos dinero si el ticket fue Aceptado o Devuelto (nunca si fue denegado)
             if (r.estado === 'Aceptado' || r.estado === 'Devuelto') {
                 const pagado = parseFloat(r.totalPagado) || 0;
                 gananciasTotales += pagado;
 
-                // Verificamos si la fecha de renta entra en los últimos 7 días
                 const fechaRenta = new Date(r.fechaRenta);
                 if (fechaRenta >= fechaHaceUnaSemana && fechaRenta <= fechaHoy) {
                     gananciasSemanales += pagado;
@@ -80,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (rentas.length === 0) {
             contenedorRentas.innerHTML = '<p style="color: var(--muted); padding: 15px; text-align: center;">No hay rentas registradas.</p>';
         } else {
-            const ultimasRentas = [...rentas].reverse().slice(0, 4); // Mostramos las últimas 4
+            const ultimasRentas = [...rentas].reverse().slice(0, 4); 
             ultimasRentas.forEach(renta => {
                 let badgeColor = '';
                 if (renta.estado === 'Aceptado' || renta.estado === 'Devuelto') badgeColor = 'badge-soft-success';
@@ -88,12 +86,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 else if (renta.estado === 'Denegado') badgeColor = 'badge-soft-danger';
                 else badgeColor = 'badge-soft-info';
 
+                // ACTUALIZACIÓN: Accedemos a los datos anidados de la relación (usuario y activo)
                 contenedorRentas.innerHTML += `
                     <div class="list-item border-hover-primary">
                         <div class="item-header">
                             <div>
-                                <div class="item-meta"><span class="item-id">${renta.usuarioEmail}</span></div>
-                                <h4 class="item-title">${renta.articuloNombre}</h4>
+                                <div class="item-meta"><span class="item-id">${renta.usuario.email}</span></div>
+                                <h4 class="item-title">${renta.activo.nombre}</h4>
                                 <p class="item-subtitle">${renta.dias} días alquilados</p>
                             </div>
                             <span class="badge ${badgeColor}">${renta.estado}</span>
@@ -112,15 +111,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         contenedorCriticos.innerHTML = '';
         let hayCriticos = false;
 
-        // Solo restamos del inventario físico los que están actualmente en manos del usuario
         const rentasActivas = rentas.filter(r => r.estado === 'Aceptado');
 
         activos.forEach(activo => {
-            const cantidadRentada = rentasActivas.filter(r => r.articuloNombre === activo.nombre).length;
+            // ACTUALIZACIÓN: Filtramos cruzando los IDs relacionales, no los nombres
+            const cantidadRentada = rentasActivas.filter(r => r.activo && r.activo.id === activo.id).length;
             const stockTotal = activo.cantidadTotal || 1; 
             const disponibles = stockTotal - cantidadRentada;
             
-            // LÓGICA DE ALARMA: Si quedan 5 o menos
             if (disponibles <= 5) {
                 hayCriticos = true;
                 

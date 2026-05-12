@@ -93,8 +93,9 @@ async function procesarPago() {
     let carrito = JSON.parse(sessionStorage.getItem('carritoSportTicket')) || [];
     if (carrito.length === 0) return;
 
-    const usuarioGuardado = sessionStorage.getItem('usuarioActivo');
-    const emailUsuario = JSON.parse(usuarioGuardado).email;
+    // ACTUALIZACIÓN: Obtenemos el objeto usuario completo y sacamos su ID
+    const usuarioGuardado = JSON.parse(sessionStorage.getItem('usuarioActivo'));
+    const idUsuario = usuarioGuardado.id;
 
     const btnPagar = document.getElementById('checkout-btn');
     btnPagar.innerText = "Procesando pago...";
@@ -102,12 +103,12 @@ async function procesarPago() {
 
     try {
         for (const item of carrito) {
+            // ACTUALIZACIÓN: Solo enviamos el ID del usuario, el ID del activo y los días.
+            // El backend se encarga de calcular el total y buscar los nombres.
             const nuevaRenta = {
-                usuarioEmail: emailUsuario,
-                articuloNombre: item.articuloNombre,
-                imagenUrl: item.imagenUrl,
-                dias: item.dias,
-                totalPagado: item.totalPagado
+                usuarioId: idUsuario,
+                activoId: item.activoId,
+                dias: item.dias
             };
 
             await fetch('http://localhost:8080/api/rentas', {
